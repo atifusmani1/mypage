@@ -9,7 +9,8 @@ welcome message), and an opencode-style chat panel docked below.
 ```
 mypage/
 ├── frontend/     Vite + React + TypeScript + Tailwind v4 + xterm.js
-└── backend/      FastAPI (Python) — chat API stub, wire an LLM here later
+├── backend/      FastAPI (Python) — chat API stub, wire an LLM here later
+└── docs/         reference materials (e.g. color/design references)
 ```
 
 ## Run it
@@ -45,6 +46,7 @@ it just shows a friendly offline error.
 | Chat panel UI | `frontend/src/components/ChatPanel.tsx` |
 | Chat API / LLM wiring | `backend/main.py` (`POST /api/chat`) |
 | Theme colors | `@theme` block in `frontend/src/index.css` |
+| Color reference image (dark high contrast) | `docs/reference-dark-high-contrast-terminal.png` |
 
 ## Notes
 
