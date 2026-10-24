@@ -7,6 +7,7 @@ interface Message extends ChatMsg {
 }
 
 // Docked bottom panel — an opencode-style chat, branded for the site.
+// Claude terminal dark theme: pure black surfaces, green/amber accent borders.
 // The backend (backend/main.py) is a stub for now; wire a real LLM in later.
 export default function ChatPanel() {
   const [height, setHeight] = useState(240)
@@ -88,10 +89,10 @@ export default function ChatPanel() {
       <div
         onMouseDown={!collapsed ? startResize : undefined}
         onDoubleClick={() => setCollapsed((c) => !c)}
-        className={`h-1.5 shrink-0 ${collapsed ? '' : 'cursor-row-resize'} hover:bg-accent/30`}
+        className={`h-1.5 shrink-0 ${collapsed ? '' : 'cursor-row-resize'} hover:bg-accent/20`}
       />
 
-      <header className="flex h-7 shrink-0 items-center gap-2 px-3 text-[11px] tracking-widest text-dim uppercase select-none">
+      <header className="flex h-7 shrink-0 items-center gap-2 px-3 text-[11px] tracking-wider text-dim uppercase select-none">
         <SparkleIcon />
         chat — atif's assistant
         <span className={`h-1.5 w-1.5 rounded-full ${busy ? 'animate-pulse bg-amber motion-reduce:animate-none' : 'bg-accent'}`} />
@@ -107,7 +108,7 @@ export default function ChatPanel() {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className={`h-3.5 w-3.5 transition-transform ${collapsed ? '' : 'rotate-180'}`}
+            className={`h-3.5 w-3.5 transition-transform duration-150 ${collapsed ? '' : 'rotate-180'}`}
           >
             <path d="m6 15 6-6 6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -116,18 +117,18 @@ export default function ChatPanel() {
 
       {!collapsed && (
         <>
-          <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 pb-2">
+          <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain px-3 pb-2" role="log" aria-live="polite">
             {messages.map((m, i) =>
               m.role === 'user' ? (
                 <div key={i} className="flex justify-end">
-                  <div className="max-w-[80%] rounded border-r-2 border-amber/70 bg-chrome/70 px-3 py-2 text-[13px] whitespace-pre-wrap">
+                  <div className="max-w-[80%] rounded border border-amber/50 bg-chrome/60 px-3 py-2 text-[12px] whitespace-pre-wrap">
                     {m.content}
                   </div>
                 </div>
               ) : (
                 <div
                   key={i}
-                  className={`max-w-[85%] rounded border-l-2 px-3 py-2 text-[13px] whitespace-pre-wrap ${
+                  className={`max-w-[85%] rounded border-l-2 px-3 py-2 text-[12px] whitespace-pre-wrap ${
                     m.error ? 'border-error/70 bg-error/10 text-error' : 'border-accent/60 bg-chrome/60 text-ink/90'
                   }`}
                 >
@@ -137,7 +138,7 @@ export default function ChatPanel() {
             )}
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 border-t border-edge px-3 py-2.5">
+          <div className="flex shrink-0 items-center gap-2 border-t border-edge px-3 py-2.5 bg-chrome/40">
             <span className="text-accent select-none">$</span>
             <input
               ref={inputRef}
@@ -146,9 +147,13 @@ export default function ChatPanel() {
               onKeyDown={(e) => e.key === 'Enter' && void send()}
               aria-label="Chat message"
               placeholder="ask me anything…"
-              className="flex-1 bg-transparent text-[13px] text-ink placeholder:text-dim/70 focus:outline-none"
+              className="flex-1 bg-transparent text-[12px] text-ink placeholder:text-dim/70 focus-visible:ring-1 focus-visible:ring-cyan"
+              autoComplete="off"
+              name="chat-message"
+              type="text"
+              spellCheck={false}
             />
-            <span className="text-[11px] text-dim/70 select-none">↵ send</span>
+            <span className="text-[10px] text-dim/70 select-none">↵ send</span>
           </div>
         </>
       )}
@@ -172,7 +177,7 @@ function TypingDots() {
 
 function SparkleIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 text-accent">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 text-accent" aria-hidden="true">
       <path d="M12 3v18M3 12h18m-4-7L7 19M7 5l10 14" strokeLinecap="round" />
     </svg>
   )

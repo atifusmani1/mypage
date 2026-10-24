@@ -6,16 +6,16 @@ import { displayPath, getNode, resolvePath, WELCOME_SCRIPT, type DirNode } from 
 // ANSI helpers — values mirror the @theme tokens in index.css
 const T = {
   reset: '\x1b[0m',
-  red: '\x1b[38;2;255;107;102m', // --color-error
-  dim: '\x1b[38;2;152;168;184m', // --color-dim
-  green: '\x1b[38;2;74;246;38m', // --color-accent (bright lime)
-  cyan: '\x1b[38;2;92;225;255m', // --color-cyan
-  white: '\x1b[1;38;2;242;255;246m', // bold --color-ink
-  yellow: '\x1b[38;2;255;214;10m', // --color-amber
+  red: '\x1b[38;2;255;107;102m', // --color-error (#ff6b66)
+  dim: '\x1b[38;2;133;133;133m', // --color-dim (#858585)
+  green: '\x1b[38;2;74;222;128m', // --color-accent (#4ade80)
+  cyan: '\x1b[38;2;92;225;255m', // --color-cyan (#5ce1ff)
+  white: '\x1b[1;38;2;204;204;204m', // bold --color-ink (#cccccc)
+  yellow: '\x1b[38;2;255;214;10m', // --color-amber (#ffd60a)
 }
 
 // Welcome script line colors: bold white shebang, green, cyan, yellow —
-// the reference "dark high contrast" mix.
+// the Claude terminal dark mix.
 const WELCOME_COLORS = [T.white, T.green, T.cyan, T.yellow]
 
 const USER = 'atif'
@@ -44,8 +44,8 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
       fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
       theme: {
         background: '#000000',
-        foreground: '#f2fff6',
-        cursor: '#4af626',
+        foreground: '#cccccc',
+        cursor: '#4ade80',
         cursorAccent: '#000000',
         selectionBackground: '#1e3d28',
       },

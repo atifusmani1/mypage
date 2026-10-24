@@ -32,14 +32,16 @@ const icons = [
 
 export default function ActivityBar() {
   return (
-    <nav className="flex w-12 shrink-0 flex-col items-center gap-1 bg-chrome py-2">
+    <nav className="flex w-12 shrink-0 flex-col items-center gap-1 bg-chrome py-2 border-r border-edge">
       {icons.map(({ id, label, active, path }) => (
         <button
           key={id}
           title={label}
           aria-label={label}
-          className={`flex h-10 w-10 items-center justify-center rounded ${
-            active ? 'text-accent' : 'text-dim hover:text-ink'
+          className={`flex h-10 w-10 items-center justify-center rounded touch-manipulation transition-colors ${
+            active
+              ? 'bg-accent/10 text-accent'
+              : 'text-dim hover:text-ink hover:bg-white/5'
           }`}
         >
           <svg
@@ -50,6 +52,7 @@ export default function ActivityBar() {
             strokeLinecap="round"
             strokeLinejoin="round"
             className="h-5 w-5"
+            aria-hidden="true"
           >
             {path}
           </svg>
