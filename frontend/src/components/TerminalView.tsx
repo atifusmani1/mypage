@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Terminal } from '@xterm/xterm'
 import { FitAddon } from '@xterm/addon-fit'
-import { displayPath, getNode, resolvePath, WELCOME_SCRIPT, type DirNode } from '../data/filesystem'
+import { displayPath, getNode, resolvePath, type DirNode } from '../data/filesystem'
+import { loadImageAsAscii } from '../lib/imageToAscii'
 
 // ANSI helpers — values mirror the @theme tokens in index.css
 const T = {
@@ -13,10 +14,6 @@ const T = {
   white: '\x1b[1;38;2;204;204;204m', // bold --color-ink (#cccccc)
   yellow: '\x1b[38;2;255;214;10m', // --color-amber (#ffd60a)
 }
-
-// Welcome script line colors: bold white shebang, green, cyan, yellow —
-// the Claude terminal dark mix.
-const WELCOME_COLORS = [T.white, T.green, T.cyan, T.yellow]
 
 const USER = 'atif'
 const HOST = 'mypage'
@@ -69,25 +66,32 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
 
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-    // ── boot sequence: type the welcome script like a human ──────────────
+    // ── boot sequence: print the ASCII headshot portrait ─────────────────
     const boot = async () => {
       // honor prefers-reduced-motion: print instantly instead of typing
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      await sleep(reduced ? 0 : 500)
-      for (const [i, text] of WELCOME_SCRIPT.entries()) {
-        term.write(WELCOME_COLORS[i] ?? T.green)
+      await sleep(reduced ? 0 : 300)
+
+      // load and render the headshot as ASCII art in terminal green
+      const portrait = await loadImageAsAscii('/headshot.png', 64)
+      if (portrait) {
+        term.write(T.green)
         if (reduced) {
-          term.write(text)
+          term.write(portrait)
         } else {
-          for (const ch of text) {
+          // print the portrait line by line for a quick reveal effect
+          const lines = portrait.split('\n')
+          for (const line of lines) {
             if (disposed) return
-            term.write(ch)
-            await sleep(16 + Math.random() * 34)
+            term.write(line + '\r\n')
+            await sleep(20)
           }
         }
-        term.write(`${T.reset}\r\n`)
-        if (!reduced) await sleep(140)
+        term.write(T.reset)
+        term.write('\r\n')
+        if (!disposed && !reduced) await sleep(200)
       }
+
       if (!disposed) term.write(promptString())
     }
     void boot()
