@@ -10,7 +10,7 @@
   --color-editorbg: #000000; /* editor / terminal background */
   --color-chrome: #0b0f14; /* title bar / activity bar / tab bar */
   --color-panel: #07090c; /* sidebar / chat panel */
-  --color-edge: #1e2933; /* borders */
+  --color-edge: #3e647f; /* borders — clear pane outlines (≥3:1 on all surfaces) */
   --color-status: #0d2137; /* status bar — the deep blue anchor */
   --color-selection: #1e3d28; /* green-tinted text selection */
 

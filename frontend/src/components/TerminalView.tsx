@@ -44,7 +44,7 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
       fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
       theme: {
         background: '#000000',
-        foreground: '#4af626',
+        foreground: '#f2fff6',
         cursor: '#4af626',
         cursorAccent: '#000000',
         selectionBackground: '#1e3d28',
@@ -103,7 +103,7 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
 
       switch (name) {
         case 'help':
-          print(`${T.green}available commands${T.reset}`)
+          print(`${T.white}available commands${T.reset}`)
           print(`  ${T.cyan}ls${T.reset} [dir]     list folder contents`)
           print(`  ${T.cyan}cat${T.reset} <file>   print a file`)
           print(`  ${T.cyan}open${T.reset} <file>  open a file in the editor`)
