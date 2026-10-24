@@ -37,6 +37,7 @@ export default function ActivityBar() {
         <button
           key={id}
           title={label}
+          aria-label={label}
           className={`flex h-10 w-10 items-center justify-center rounded ${
             active ? 'text-accent' : 'text-dim hover:text-ink'
           }`}

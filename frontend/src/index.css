@@ -4,17 +4,25 @@
 @theme {
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* mypage dark theme */
-  --color-void: #0b0b0d; /* page background */
-  --color-chrome: #141417; /* title bar / activity bar */
-  --color-panel: #1a1a1f; /* sidebar / chat panel */
-  --color-editorbg: #111114; /* editor / terminal background */
-  --color-edge: #26262c; /* borders */
-  --color-ink: #d4d4d8; /* primary text */
-  --color-dim: #7c7c88; /* muted text */
-  --color-accent: #4ade80; /* terminal green */
-  --color-amber: #fbbf24; /* secondary highlight */
-  --color-status: #12291d; /* status bar background */
+  /* mypage — dark high contrast (Claude-Code-inspired) */
+  /* surfaces: blue-tinted black ramp, pure black editor */
+  --color-void: #000000; /* page background */
+  --color-editorbg: #000000; /* editor / terminal background */
+  --color-chrome: #0b0f14; /* title bar / activity bar / tab bar */
+  --color-panel: #07090c; /* sidebar / chat panel */
+  --color-edge: #1e2933; /* borders */
+  --color-status: #0d2137; /* status bar — the deep blue anchor */
+  --color-selection: #1e3d28; /* green-tinted text selection */
+
+  /* text */
+  --color-ink: #f2fff6; /* bold near-white (20:1 on black) */
+  --color-dim: #98a8b8; /* secondary text (8.6:1 on black) */
+
+  /* signal colors */
+  --color-accent: #4af626; /* bright lime green — live/primary elements */
+  --color-amber: #ffd60a; /* yellow — highlights, user input */
+  --color-cyan: #5ce1ff; /* cyan — secondary/info pops */
+  --color-error: #ff6b66; /* red — errors */
 }
 
 html,
@@ -27,8 +35,21 @@ body {
   @apply bg-void font-mono text-ink antialiased overflow-hidden;
 }
 
+html {
+  color-scheme: dark;
+}
+
+::selection {
+  background: var(--color-selection);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: -1px;
+}
+
 /* slim scrollbars to match the IDE look */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #333338 transparent;
+  scrollbar-color: #2e3a44 transparent;
 }

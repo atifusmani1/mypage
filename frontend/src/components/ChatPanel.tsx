@@ -94,9 +94,14 @@ export default function ChatPanel() {
       <header className="flex h-7 shrink-0 items-center gap-2 px-3 text-[11px] tracking-widest text-dim uppercase select-none">
         <SparkleIcon />
         chat — atif's assistant
-        <span className={`h-1.5 w-1.5 rounded-full ${busy ? 'animate-pulse bg-amber' : 'bg-accent'}`} />
+        <span className={`h-1.5 w-1.5 rounded-full ${busy ? 'animate-pulse bg-amber motion-reduce:animate-none' : 'bg-accent'}`} />
         <span className="flex-1" />
-        <button onClick={() => setCollapsed((c) => !c)} className="p-0.5 hover:text-ink" title={collapsed ? 'expand' : 'collapse'}>
+        <button
+          onClick={() => setCollapsed((c) => !c)}
+          className="p-0.5 hover:text-ink"
+          aria-label={collapsed ? 'Expand chat' : 'Collapse chat'}
+          title={collapsed ? 'expand' : 'collapse'}
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -123,7 +128,7 @@ export default function ChatPanel() {
                 <div
                   key={i}
                   className={`max-w-[85%] rounded border-l-2 px-3 py-2 text-[13px] whitespace-pre-wrap ${
-                    m.error ? 'border-red-400/70 bg-red-400/5 text-red-200/90' : 'border-accent/60 bg-chrome/60 text-ink/90'
+                    m.error ? 'border-error/70 bg-error/10 text-error' : 'border-accent/60 bg-chrome/60 text-ink/90'
                   }`}
                 >
                   {m.pending ? <TypingDots /> : m.content}
@@ -139,6 +144,7 @@ export default function ChatPanel() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && void send()}
+              aria-label="Chat message"
               placeholder="ask me anything…"
               className="flex-1 bg-transparent text-[13px] text-ink placeholder:text-dim/70 focus:outline-none"
             />
@@ -154,7 +160,11 @@ function TypingDots() {
   return (
     <span className="flex items-center gap-1 py-1">
       {[0, 1, 2].map((i) => (
-        <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent" style={{ animationDelay: `${i * 150}ms` }} />
+        <span
+          key={i}
+          className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent motion-reduce:animate-none"
+          style={{ animationDelay: `${i * 150}ms` }}
+        />
       ))}
     </span>
   )

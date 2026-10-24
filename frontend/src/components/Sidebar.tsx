@@ -107,7 +107,7 @@ function FileRow({
     <button
       onClick={() => exists && onOpenFile(path)}
       className={`flex w-full items-center gap-1.5 py-[3px] pr-2 text-left text-[13px] ${
-        active ? 'bg-white/10 text-accent' : 'text-ink/90 hover:bg-white/5'
+        active ? 'bg-accent/10 text-accent' : 'text-ink/90 hover:bg-white/5'
       }`}
       style={{ paddingLeft: depth * 14 + 20 }}
     >

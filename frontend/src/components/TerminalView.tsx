@@ -3,16 +3,20 @@ import { Terminal } from '@xterm/xterm'
 import { FitAddon } from '@xterm/addon-fit'
 import { displayPath, getNode, resolvePath, WELCOME_SCRIPT, type DirNode } from '../data/filesystem'
 
-// ANSI helpers
+// ANSI helpers — values mirror the @theme tokens in index.css
 const T = {
   reset: '\x1b[0m',
-  dim: '\x1b[90m',
-  green: '\x1b[38;2;74;222;128m',
-  cyan: '\x1b[38;2;103;232;249m',
-  purple: '\x1b[38;2;197;134;192m',
-  comment: '\x1b[38;2;106;153;85m',
-  yellow: '\x1b[38;2;251;191;36m',
+  red: '\x1b[38;2;255;107;102m', // --color-error
+  dim: '\x1b[38;2;152;168;184m', // --color-dim
+  green: '\x1b[38;2;74;246;38m', // --color-accent (bright lime)
+  cyan: '\x1b[38;2;92;225;255m', // --color-cyan
+  white: '\x1b[1;38;2;242;255;246m', // bold --color-ink
+  yellow: '\x1b[38;2;255;214;10m', // --color-amber
 }
+
+// Welcome script line colors: bold white shebang, green, cyan, yellow —
+// the reference "dark high contrast" mix.
+const WELCOME_COLORS = [T.white, T.green, T.cyan, T.yellow]
 
 const USER = 'atif'
 const HOST = 'mypage'
@@ -39,11 +43,11 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
       lineHeight: 1.35,
       fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
       theme: {
-        background: '#111114',
-        foreground: '#d4d4d8',
-        cursor: '#4ade80',
-        cursorAccent: '#111114',
-        selectionBackground: '#2c3c34',
+        background: '#000000',
+        foreground: '#4af626',
+        cursor: '#4af626',
+        cursorAccent: '#000000',
+        selectionBackground: '#1e3d28',
       },
     })
     const fit = new FitAddon()
@@ -67,17 +71,22 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
 
     // ── boot sequence: type the welcome script like a human ──────────────
     const boot = async () => {
-      await sleep(500)
-      for (const text of WELCOME_SCRIPT) {
-        const color = text.startsWith('#!') ? T.purple : T.comment
-        term.write(color)
-        for (const ch of text) {
-          if (disposed) return
-          term.write(ch)
-          await sleep(16 + Math.random() * 34)
+      // honor prefers-reduced-motion: print instantly instead of typing
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      await sleep(reduced ? 0 : 500)
+      for (const [i, text] of WELCOME_SCRIPT.entries()) {
+        term.write(WELCOME_COLORS[i] ?? T.green)
+        if (reduced) {
+          term.write(text)
+        } else {
+          for (const ch of text) {
+            if (disposed) return
+            term.write(ch)
+            await sleep(16 + Math.random() * 34)
+          }
         }
         term.write(`${T.reset}\r\n`)
-        await sleep(140)
+        if (!reduced) await sleep(140)
       }
       if (!disposed) term.write(promptString())
     }
@@ -106,9 +115,9 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
 
         case 'ls': {
           const target = resolvePath(cwd, args[0])
-          if (!target) return print(`ls: ${args[0]}: no such file or directory`)
+          if (!target) return print(`${T.red}ls: ${args[0]}: no such file or directory${T.reset}`)
           const node = getNode(target)
-          if (!node) return print(`ls: ${args[0]}: no such file or directory`)
+          if (!node) return print(`${T.red}ls: ${args[0]}: no such file or directory${T.reset}`)
           if (node.type === 'file') return print(args[0])
           const entries = Object.entries((node as DirNode).children)
           if (entries.length === 0) return print(`${T.dim}(empty)${T.reset}`)
@@ -122,21 +131,21 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
         }
 
         case 'cat': {
-          if (!args[0]) return print('cat: missing file operand')
+          if (!args[0]) return print(`${T.red}cat: missing file operand${T.reset}`)
           const target = resolvePath(cwd, args[0])
           const node = target && getNode(target)
-          if (!node) return print(`cat: ${args[0]}: no such file or directory`)
-          if (node.type === 'dir') return print(`cat: ${args[0]}: is a directory`)
+          if (!node) return print(`${T.red}cat: ${args[0]}: no such file or directory${T.reset}`)
+          if (node.type === 'dir') return print(`${T.red}cat: ${args[0]}: is a directory${T.reset}`)
           print(node.content)
           break
         }
 
         case 'open': {
-          if (!args[0]) return print('open: missing file operand')
+          if (!args[0]) return print(`${T.red}open: missing file operand${T.reset}`)
           const target = resolvePath(cwd, args[0])
           const node = target && getNode(target)
-          if (!node) return print(`open: ${args[0]}: no such file or directory`)
-          if (node.type === 'dir') return print(`open: ${args[0]}: is a directory`)
+          if (!node) return print(`${T.red}open: ${args[0]}: no such file or directory${T.reset}`)
+          if (node.type === 'dir') return print(`${T.red}open: ${args[0]}: is a directory${T.reset}`)
           print(`${T.dim}opening ${args[0]} in the editor…${T.reset}`)
           handlersRef.current.onOpenFile(target.join('/'))
           break
@@ -144,9 +153,9 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
 
         case 'cd': {
           const target = resolvePath(cwd, args[0])
-          if (!target) return print(`cd: ${args[0] ?? ''}: no such file or directory`)
+          if (!target) return print(`${T.red}cd: ${args[0] ?? ''}: no such file or directory${T.reset}`)
           const node = getNode(target)
-          if (node?.type === 'file') return print(`cd: ${args[0]}: not a directory`)
+          if (node?.type === 'file') return print(`${T.red}cd: ${args[0]}: not a directory${T.reset}`)
           cwd = target
           break
         }
@@ -201,7 +210,7 @@ export default function TerminalView({ onOpenFile }: TerminalViewProps) {
           break
 
         default:
-          print(`zsh: command not found: ${name}  ${T.dim}(try "help")${T.reset}`)
+          print(`${T.red}zsh: command not found: ${name}${T.reset}  ${T.dim}(try "help")${T.reset}`)
       }
     }
 

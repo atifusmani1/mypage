@@ -9,9 +9,9 @@ export default function StatusBar() {
           </svg>
           main
         </span>
-        <span>~/mypage</span>
+        <span className="text-cyan">~/mypage</span>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 text-ink/90">
         <span>bash</span>
         <span>UTF-8</span>
         <span>atifusmani.dev</span>
