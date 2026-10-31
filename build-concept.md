@@ -13,7 +13,7 @@ browsing his files and chatting with an assistant.
 Two halves:
 
 1. **An "internal operating system" feel** — the page opens to a live terminal
-   with a `$` prompt. The target opening shows Atif's supplied ASCII portrait
+    with a `$` prompt. The target opening shows an ASCII portrait generated from Atif's supplied headshot
    with an introduction paragraph to its right, then the usable prompt.
 2. **A chat assistant** — a white-label of the opencode terminal UI with
    Atif's own flavor, docked as a panel. This is the main feature.
@@ -49,9 +49,11 @@ The site is for everyone — explicitly not just developers
 
 ## 3. Terminal behavior
 
-- Target boot: supplied ASCII portrait plus introduction paragraph alongside
-  it on desktop, stacked when narrow. The user will provide the currently
-  empty `frontend/public/atif-ASCII.txt`; do not invent a replacement.
+- Target boot: ASCII portrait generated from `frontend/public/headshot.png`
+  plus introduction paragraph alongside it on desktop, stacked when narrow.
+  The user confirmed this photo is the source; no separate ASCII submission is
+  required. Generate and visually review readable text art during implementation.
+  The empty `frontend/public/atif-ASCII.txt` is unused, not a content prerequisite.
   Introduction copy belongs in shared data. Exact reveal/typing timing awaits
   approval; the opening reference is a static PNG. Include skip/replay and an
   instant reduced-motion variant. Current runtime still converts headshot.png

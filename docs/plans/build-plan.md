@@ -8,7 +8,7 @@ The user approved reference organization, documentation updates, and documented 
 
 - Follow the supplied screenshots for workbench geometry and TUI message styling.
 - Preserve JetBrains Mono, dark high contrast, and the fixed stack.
-- The user will supply the ASCII portrait; `frontend/public/atif-ASCII.txt` is currently empty. Do not replace it with guessed art.
+- Updated user clarification: `frontend/public/headshot.png` is the approved source for generating the ASCII portrait. No separate text-art submission is required. Keep the source at this working public URL; generate and visually review readable art during implementation. The empty `frontend/public/atif-ASCII.txt` is unused.
 - This is a safe, read-only portfolio IDE, not host-shell access or a code execution platform.
 
 The central visual correction is **a VS Code workbench containing a distinct OpenCode-like terminal application**, not a black page divided into generic chat cards. Existing right-aligned bubbles are superseded by the supplied reference. Website branding must not falsely imply an actual OpenCode backend or working provider connection.
@@ -75,10 +75,10 @@ Each phase is a separately verified local Conventional Commit. Do not mix the AP
 
 ### Phase 0 — approve assets and reference baseline
 
-**Prerequisites:** user ASCII art, paragraph text (or visibly marked placeholder), animation timing decision, provider/hosting decisions only when backend phase starts.
+**Prerequisites:** paragraph text (or visibly marked placeholder), animation timing decision, provider/hosting decisions only when backend phase starts. The source portrait is already supplied.
 
 Tasks:
-1. Validate portrait file is nonempty, plain text, free of ANSI/control sequences, has stable newline normalization and known row/column dimensions. Preserve spaces. Get a compact variant if the full art cannot fit mobile.
+1. Generate static ASCII candidates from the supplied headshot: compare crop, luminance/contrast normalization, glyph density and character aspect ratio at the actual terminal font size. Review face/eye/glasses definition with the user; do not repeat the current unreviewed coarse runtime conversion. Produce full and compact variants if needed. Validate generated text is nonempty, free of ANSI/control sequences, has stable newline normalization and known row/column dimensions. Preserve spaces.
 2. Capture current UI at 1440×900, 1280×800, 768×1024 and 375×812; include a 320px case and short landscape. Record font loading, browser and device scale. Capture boot, file view, initial chat, populated chat and collapsed panel.
 3. Review a static workbench/composer comparison before animation or provider work. Approve token hierarchy and pane proportions.
 4. Ask for animation cadence: proposed short line reveal for portrait, paragraph typing beside it, instant reduced-motion rendering, visible Skip/Replay controls. Do not invent timing from the PNG.
@@ -101,7 +101,7 @@ Tasks:
 
 **Files:** TerminalView, filesystem welcome data; future terminal boot/layout modules. Leave legacy imageToAscii removal until separately approved.
 
-1. Load the supplied text asset instead of converting the PNG in the browser. The current photo has dark features that lose definition under the coarse brightness ramp; color alone cannot recover them.
+1. Load the reviewed, pre-generated text asset instead of converting the PNG in the browser. Use `frontend/public/portraits/` for generated variants once created; retain `frontend/public/headshot.png` as the source. The current photo has dark features that lose definition under the coarse brightness ramp; color alone cannot recover them. Any new conversion dependency needs approval first.
 2. Format portrait rows and word-wrapped paragraph into padded terminal columns. Use actual terminal columns and font metrics; don't wrap the art itself. Stack when portrait + gap + readable paragraph cannot fit. Reserve enough initial upper-pane height to show the portrait meaningfully; tune final dimensions with the supplied art.
 3. Define boot states loading → revealing → ready, plus skipped/error/disposed. Normalize CRLF in every branch, stop timers on cleanup, wait for font/terminal fit, and keep exactly one usable prompt. During boot, user input should skip/finish the intro and then be processed rather than interleaving with output.
 4. Reduced motion shows the completed scene immediately and disables blinking/smooth auto-scroll. Missing/empty portrait shows an honest text fallback plus the introduction and prompt; never leave a blank terminal.
@@ -181,4 +181,4 @@ Tasks:
 
 Phase 0 → 1 → (2 and 3 can proceed independently) → 4 → 5 → 6. Backend contract design can proceed alongside visual work, but live provider integration waits for approval. Accessibility and responsive verification happen in every phase, not just at the end.
 
-Open decisions: supplied ASCII dimensions/compact variant, introduction copy, precise boot timing, final token/proportion approval, provider/model/budget, hosting/origin/rate-limit architecture, privacy/retention, optional transcript persistence and new test dependencies. Keep unanswered choices marked blocked or proposed; do not guess personal facts or capabilities.
+Open decisions: generated ASCII visual approval/dimensions/compact variant, introduction copy, precise boot timing, final token/proportion approval, provider/model/budget, hosting/origin/rate-limit architecture, privacy/retention, optional transcript persistence and new test dependencies. Keep unanswered choices marked blocked or proposed; do not guess personal facts or capabilities. The source headshot is supplied and is not a blocker. The starter favicon was removed at the user's request; no replacement logo is assumed.

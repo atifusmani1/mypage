@@ -54,7 +54,8 @@ it just shows a friendly offline error.
 | Design references and research sources | `docs/references/` |
 | Execution plan, audit and acceptance checklist | `docs/plans/` |
 | Current portrait conversion | `frontend/src/lib/imageToAscii.ts`, `frontend/public/headshot.png` |
-| User-supplied ASCII portrait (currently empty; awaiting content) | `frontend/public/atif-ASCII.txt` |
+| Approved source photo for the planned generated ASCII portrait | `frontend/public/headshot.png` |
+| Unused empty ASCII file (not required from user) | `frontend/public/atif-ASCII.txt` |
 | Future workbench/chat/terminal/shared components (README-only scaffolds) | `frontend/src/components/{workbench,chat,terminal,ui}/` |
 | Future terminal/workbench logic (README-only scaffolds) | `frontend/src/lib/{terminal,workbench}/` |
 | Future backend modules (README-only scaffold) | `backend/app/` |

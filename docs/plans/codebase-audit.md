@@ -2,6 +2,10 @@
 
 Baseline: `f208230`, 2026-10-31. Static inspection; line numbers refer to the pre-rebuild source. Findings are planned work, **not fixed**. The two new screenshots and empty ASCII file were untracked on arrival. No secrets/dependency source was inspected.
 
+Follow-up: the user clarified that headshot.png is the source for generated ASCII,
+so the empty text file is no longer a content blocker. The starter favicon and
+its HTML reference were removed on request. Other baseline findings remain open.
+
 | Priority | Evidence | Finding / required action |
 |---|---|---|
 | High | `frontend/src/index.css:9-14` | Editor, chrome and status share black; establish reference-based surface hierarchy. |
