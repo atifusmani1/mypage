@@ -13,7 +13,8 @@ browsing his files and chatting with an assistant.
 Two halves:
 
 1. **An "internal operating system" feel** — the page opens to a live terminal
-   with a `$` prompt. It boots by typing out a welcome script at a human pace.
+   with a `$` prompt. The target opening shows Atif's supplied ASCII portrait
+   with an introduction paragraph to its right, then the usable prompt.
 2. **A chat assistant** — a white-label of the opencode terminal UI with
    Atif's own flavor, docked as a panel. This is the main feature.
 
@@ -48,8 +49,13 @@ The site is for everyone — explicitly not just developers
 
 ## 3. Terminal behavior
 
-- Boot: types out `WELCOME_SCRIPT` (see `frontend/src/data/filesystem.ts`)
-  per character with human pacing, then shows the prompt.
+- Target boot: supplied ASCII portrait plus introduction paragraph alongside
+  it on desktop, stacked when narrow. The user will provide the currently
+  empty `frontend/public/atif-ASCII.txt`; do not invent a replacement.
+  Introduction copy belongs in shared data. Exact reveal/typing timing awaits
+  approval; the opening reference is a static PNG. Include skip/replay and an
+  instant reduced-motion variant. Current runtime still converts headshot.png
+  and does not display the welcome paragraph.
 - Prompt: `atif@mypage $` (green user@host, cyan path, dim `$`).
 - Commands: `ls`, `cat`, `cd`, `tree`, `open <file>` (opens editor tab),
   `pwd`, `whoami`, `echo`, `date`, `history`, `clear`, `chat`, `help`,
@@ -60,8 +66,11 @@ The site is for everyone — explicitly not just developers
 
 ## 4. Chat behavior
 
-- opencode-style: assistant replies in bordered blocks, user messages
-  right-aligned, typing-dots while waiting, message history sent to backend.
+- Target follows `docs/references/chat-TUI-example.png`: wide left-aligned
+  user blocks with a cyan rail, plain assistant output with metadata below,
+  a prominent highlighted multiline composer with mode/provider row inside,
+  footer hints below, and a collapsible context column. This supersedes the
+  old right-aligned bubble design. Metadata must be real or clearly unavailable.
 - Backend: FastAPI stub (`backend/main.py`, `POST /api/chat`). A real LLM
   provider gets wired in later without changing the frontend contract.
 
@@ -81,13 +90,21 @@ The site is for everyone — explicitly not just developers
 - Dev: `npm run dev` (frontend, :5173, proxies `/api` → :8000);
   `uvicorn main:app --reload --port 8000` (backend)
 
-## 7. Current state (scaffold complete)
+## 7. Current state (runtime scaffold; rebuild planned)
 
-All layout chrome, terminal shell, chat panel, virtual filesystem, and the
-FastAPI stub are built and verified end-to-end. See README "Where things
-live" for the file map.
+Layout chrome, simulated terminal, chat panel, virtual filesystem and FastAPI
+echo stub exist, but have known fidelity, behavior and accessibility gaps.
+See `docs/plans/codebase-audit.md`; do not treat the scaffold as release-ready.
+The 2026-10-31 planning pass organized references and added README-only future
+module/test folders; it did not implement the redesign. See README for the map.
 
 ## 8. Roadmap (order matters)
+
+Detailed execution order, dependencies, backend contract proposals and checks
+live in `docs/plans/build-plan.md`. User-approved direction: supplied screenshots
+govern geometry, JetBrains Mono/high contrast remain, and all IDE functionality
+is a safe read-only portfolio simulation. Exact visual tokens and animation
+timing still need review. No dependencies are approved by the plan itself.
 
 1. **Design pass** — load the vendored skills (`frontend-design`,
    `better-ui`, `better-typography`, `better-colors`,
@@ -105,6 +122,8 @@ live" for the file map.
 ## 9. Constraints
 
 - Single-page app, no auth, no tracking.
+- No host shell, arbitrary code execution, filesystem writes or visitor API-key
+  collection. Unsupported IDE actions must not look functional.
 - Placeholder content must stay visibly marked as placeholders — never
   fabricate real-looking links, emails, or project claims.
 - Design choices serve the "feels like a real IDE" illusion but must remain

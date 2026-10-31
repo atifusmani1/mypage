@@ -1,8 +1,13 @@
 # mypage — a terminal/IDE personal website
 
 A personal website for Atif Usmani that looks like VS Code: a file explorer on
-the left, a real interactive terminal in the editor area (with a typewriter
-welcome message), and an opencode-style chat panel docked below.
+the left, an interactive simulated terminal in the editor area, and an
+opencode-style chat panel docked below. The current runtime is a scaffold;
+the reference-driven rebuild is planned, not implemented.
+
+Start with [the execution plan](docs/plans/build-plan.md),
+[baseline audit](docs/plans/codebase-audit.md), and
+[acceptance gates](docs/plans/acceptance-checklist.md).
 
 ## Structure
 
@@ -10,7 +15,7 @@ welcome message), and an opencode-style chat panel docked below.
 mypage/
 ├── frontend/     Vite + React + TypeScript + Tailwind v4 + xterm.js
 ├── backend/      FastAPI (Python) — chat API stub, wire an LLM here later
-└── docs/         reference materials (e.g. color/design references)
+└── docs/         plans/ (execution + audit), references/ (design evidence)
 ```
 
 ## Run it
@@ -41,12 +46,19 @@ it just shows a friendly offline error.
 | What | Where |
 |---|---|
 | Virtual filesystem (explorer + terminal + editor) | `frontend/src/data/filesystem.ts` |
-| Welcome script that types out on boot | `WELCOME_SCRIPT` in `filesystem.ts` |
+| Introduction copy (currently not rendered on boot) | `WELCOME_SCRIPT` in `filesystem.ts` |
 | Shell prompt (`$`) + commands | `frontend/src/components/TerminalView.tsx` |
 | Chat panel UI | `frontend/src/components/ChatPanel.tsx` |
 | Chat API / LLM wiring | `backend/main.py` (`POST /api/chat`) |
 | Theme colors | `@theme` block in `frontend/src/index.css` |
-| Color reference image (dark high contrast) | `docs/reference-dark-high-contrast-terminal.png` |
+| Design references and research sources | `docs/references/` |
+| Execution plan, audit and acceptance checklist | `docs/plans/` |
+| Current portrait conversion | `frontend/src/lib/imageToAscii.ts`, `frontend/public/headshot.png` |
+| User-supplied ASCII portrait (currently empty; awaiting content) | `frontend/public/atif-ASCII.txt` |
+| Future workbench/chat/terminal/shared components (README-only scaffolds) | `frontend/src/components/{workbench,chat,terminal,ui}/` |
+| Future terminal/workbench logic (README-only scaffolds) | `frontend/src/lib/{terminal,workbench}/` |
+| Future backend modules (README-only scaffold) | `backend/app/` |
+| Planned test suites (README-only; no runner installed) | `frontend/tests/`, `backend/tests/` |
 
 ## Notes
 
