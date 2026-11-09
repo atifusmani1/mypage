@@ -1,0 +1,312 @@
+@import '../styles/theme.css';
+
+html {
+  height: auto;
+  background: var(--color-page);
+  color-scheme: dark;
+  scroll-padding-block-start: 8rem;
+}
+
+body {
+  margin: 0;
+  height: auto;
+  min-width: 320px;
+  overflow: visible;
+  background: var(--color-page);
+  color: var(--color-heading);
+  font-family: var(--font-portfolio);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+h1, h3 { overflow-wrap: anywhere; }
+a { color: inherit; touch-action: manipulation; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; touch-action: manipulation; }
+button:disabled { cursor: not-allowed; }
+::selection { background: var(--color-heading); color: var(--color-page); }
+:focus-visible { outline: 2px solid var(--color-heading); outline-offset: 5px; }
+main:focus { outline: none; }
+
+.page-width {
+  width: calc(100% - 8rem);
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--color-heading);
+  color: var(--color-page);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 20;
+  padding-block: 1.75rem;
+  background: color-mix(in srgb, var(--color-page) 88%, transparent);
+  backdrop-filter: blur(18px);
+}
+.header-inner {
+  width: calc(100% - 8rem);
+  max-width: 1600px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+.site-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+  white-space: nowrap;
+  padding-block: 0.5rem;
+}
+.navigation-shell { min-width: 0; width: 100%; max-width: 10rem; justify-self: center; position: relative; display: grid; }
+/* The library centers a fragment of glass layers with inline transforms.
+   Stack those layers in normal flow instead, keeping links and focus in place. */
+.navigation-shell > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  max-width: 100%;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  transition: none !important;
+}
+.navigation-shell > :not(.navigation-glass):not(nav) {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.navigation-glass .glass {
+  display: flex !important;
+  width: 100%;
+  transition: none !important;
+}
+.navigation-glass .glass > div {
+  min-width: 0;
+  width: 100%;
+  font: inherit !important;
+  transition: none !important;
+}
+.navigation-glass > svg { max-width: 100%; pointer-events: none; }
+.navigation-glass { border-radius: 50px; background: color-mix(in srgb, var(--color-glass) 20%, transparent); }
+/* Fade only the decorative layers, never the link text. */
+.navigation-shell > :not(.navigation-glass) { opacity: 0.3 !important; }
+.navigation-glass .glass { box-shadow: none !important; }
+.navigation-fallback {
+  width: 100%;
+  max-width: 10rem;
+  justify-self: center;
+  border-radius: 50px;
+  background: color-mix(in srgb, var(--color-glass) 20%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-rule) 45%, transparent);
+}
+.section-navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(0.75rem, 3vw, 3rem);
+  min-width: 0;
+}
+.section-navigation a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  height: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.section-navigation a[aria-current] {
+  background: color-mix(in srgb, var(--color-glass-hover) 35%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.section-navigation a:focus-visible { outline-offset: -4px; }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-page);
+  min-height: min(830px, calc(100svh - 110px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 8rem 6rem;
+  border-block-start: 1px solid var(--color-rule);
+}
+.hero-copy { position: relative; z-index: 2; }
+h1 {
+  margin: 0;
+  font-size: clamp(3.5rem, 6.8vw, 7.5rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.065em;
+}
+h1 span { display: block; }
+.welcome-copy {
+  max-width: 29rem;
+  margin-block: 2.25rem 0;
+  font-size: clamp(1.0625rem, 1.45vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--color-copy);
+  text-wrap: pretty;
+}
+.draft-note {
+  display: inline-block;
+  margin-block-start: 1rem;
+  color: var(--color-copy);
+  font-size: 0.75rem;
+}
+.hero-portrait {
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  inset-inline-end: -1.5rem;
+  width: 66%;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(to right, transparent, var(--color-heading) 25%), linear-gradient(to bottom, var(--color-heading) 75%, transparent);
+  mask-composite: intersect;
+}
+.ascii-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+.hero-next { align-self: flex-start; margin-block-start: 3rem; }
+.text-link {
+  display: inline-block;
+  padding-block: 0.5rem;
+  font-size: 0.875rem;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--color-copy);
+}
+.content-section {
+  border-block-start: 1px solid var(--color-rule);
+  padding-block: 3rem 7rem;
+  scroll-margin-block-start: 1rem;
+}
+.section-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 4rem; }
+h2 { margin: 0; font-size: 1.125rem; font-weight: 500; line-height: 1.5; }
+.section-copy { max-width: 46rem; min-width: 0; }
+h3 {
+  margin: 0 0 1.75rem;
+  font-size: clamp(2.5rem, 4.1vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+.section-copy p { max-width: 36rem; margin-block: 0 1rem; color: var(--color-copy); font-size: 1.125rem; line-height: 1.7; text-wrap: pretty; }
+.section-copy .placeholder-note { margin-block-start: 1.5rem; font-size: 0.8125rem; }
+.project-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  margin-block-start: 2.5rem;
+  border-block: 1px solid var(--color-rule);
+}
+.project-placeholder h4 { margin: 0; font-size: 1.125rem; font-weight: 500; }
+.project-placeholder span { font-size: 0.875rem; color: var(--color-copy); }
+.contact-section { padding-block-end: 8rem; }
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-block-start: 1px solid var(--color-rule);
+  padding-block: 1.5rem 2rem;
+  font-size: 0.875rem;
+  color: var(--color-copy);
+}
+
+@media (hover: hover) {
+  .section-navigation a:hover { background: color-mix(in srgb, var(--color-glass-hover) 40%, transparent); }
+  .site-name:hover, .text-link:hover { color: var(--color-heading); text-decoration: underline; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .section-navigation a { transition: background-color 150ms ease-out; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+@media (max-width: 1000px) {
+  .page-width, .header-inner { width: calc(100% - 4rem); }
+  .hero { min-height: 740px; padding-block: 7rem; }
+  .hero-portrait { width: 78%; inset-inline-end: -1rem; opacity: 0.7; }
+  h1 { font-size: clamp(3.5rem, 8vw, 6rem); }
+  .section-layout { gap: 2rem; }
+}
+@media (max-width: 700px) {
+  html { scroll-padding-block-start: 10rem; }
+  .page-width, .header-inner { width: calc(100% - 2.5rem); }
+  .site-header { padding-block: 0.75rem; }
+  .header-inner { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .site-name { justify-self: start; }
+  .navigation-glass { width: 100%; }
+  .section-navigation { gap: 0.5rem; }
+  .section-navigation a { min-height: 2.75rem; padding: 0.35rem 0.3rem; font-size: 0.75rem; }
+  .site-name { font-size: 1rem; padding-block: 0.125rem; }
+  .hero { min-height: 740px; justify-content: flex-start; padding-block: 4rem 2.5rem; }
+  h1 { font-size: clamp(2.25rem, 8.7vw, 3.8rem); letter-spacing: -0.06em; }
+  .welcome-copy { max-width: 24rem; margin-block-start: 1.75rem; }
+  .hero-portrait {
+    inset-block-start: 18rem;
+    inset-inline-end: -1rem;
+    width: 100%;
+    height: 28rem;
+    opacity: 0.6;
+    mask-image: linear-gradient(to bottom, transparent, var(--color-heading) 20%, var(--color-heading) 70%, transparent);
+    mask-composite: add;
+  }
+  .ascii-portrait { object-fit: contain; object-position: center; }
+  .hero-next { margin-block-start: auto; position: relative; z-index: 2; }
+  .content-section { padding-block: 1.75rem 4rem; }
+  .section-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  h2 { font-size: 1rem; }
+  h3 { font-size: clamp(2.25rem, 8vw, 3rem); }
+  .section-copy p { font-size: 1rem; }
+  .site-footer { padding-block: 1rem 2rem; }
+}
+@media (max-width: 360px) {
+  .page-width, .header-inner { width: calc(100% - 2rem); }
+  .section-navigation a { font-size: 0.6875rem; }
+}
+@media (forced-colors: active) {
+  .navigation-glass, .navigation-fallback { border: 1px solid ButtonText; }
+  .section-navigation a[aria-current] { outline: 1px solid Highlight; }
+}

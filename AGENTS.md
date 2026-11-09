@@ -1,62 +1,69 @@
-# AGENTS.md — rules for any agent working in this repo
+# AGENTS.md — repository rules
 
-Product intent lives in `build-concept.md` — read it before making decisions.
-This file covers the always-on engineering rules.
+Read `build-concept.md` before making product decisions.
 
-## Project
+## Project and stack
 
-Personal website for Atif Usmani: a VS Code–style terminal/IDE in the browser
-with an opencode-style chat assistant. Dark theme, monospace-first.
+Atif Usmani's continuous dark personal page, with bold white type, an ASCII
+portrait, and compact liquid-glass section navigation.
 
-## Stack (fixed — do not change without approval)
+- One Next.js App Router + React 19 + TypeScript app at the repository root.
+- Tailwind CSS v4, with `liquid-glass-react` for navigation.
+- Node 22, installed via Homebrew. No separate frontend/backend projects.
+- Stack changes and new dependencies require explicit user approval.
 
-- Frontend: `frontend/` — Vite + React 19 + TypeScript + Tailwind CSS v4 + xterm.js
-- Backend: `backend/` — FastAPI (Python), chat stub in `main.py`
-- Node is installed via Homebrew as `node@22`.
+## Structure
 
-## Layout of the repo
+- `src/app/`: page, root layout, metadata, and global/responsive styles.
+- `src/components/`: one React component per file, PascalCase names.
+- `src/data/site.ts`: navigation and draft welcome copy.
+- `src/styles/theme.css`: `@theme` color/font tokens; the only place app colors
+  are defined. Components reference tokens, not raw hex. Third-party library
+  internals are not app source and must not be edited in `node_modules/`.
+- `content/about.md`: editable, unpublished About draft. Don't display it until
+  the user approves publication.
+- `public/images/`: only assets used by the public page.
+- `docs/design/`: original references/effect assets; preserve provenance/notices.
+- `.opencode/skills/`: vendored design skills; provenance in `SOURCES.md`.
+- `README.md`: commands and the “Where things live” table.
+- `build-concept.md`: current product spec; keep it accurate.
 
-- `frontend/src/components/` — one React component per file
-- `frontend/src/data/filesystem.ts` — the virtual filesystem (single source
-  of truth for explorer, terminal commands, and editor tabs)
-- `frontend/src/lib/` — API clients
-- `frontend/src/index.css` — `@theme` design tokens (the only place colors
-  are defined; the xterm theme object in `TerminalView.tsx` is the
-  documented exception)
-- `.opencode/skills/` — vendored design-standard skills (see
-  `.opencode/skills/SOURCES.md` for provenance)
-- `.opencode/agents/` — agent definitions
-- `build-concept.md` — product spec; keep it current
-
-## Commands
+## Commands (repository root)
 
 ```bash
-cd frontend && npm run dev        # UI at :5173 (proxies /api → :8000)
-cd frontend && npm run build      # tsc + vite — must pass before any commit
-cd backend && .venv/bin/uvicorn main:app --reload --port 8000
-curl http://localhost:8000/api/health   # backend check
+npm run dev          # http://localhost:3000
+npm run build        # Next.js production build and framework/type checks
+npm run lint         # Oxlint
+npm run typecheck    # after Next has generated framework types
+npm start            # serve the production build
 ```
 
-## Rules
+## Engineering rules
 
-1. **Commits**: small, scoped, Conventional Commits (`feat:`, `fix:`,
-   `style:`, `docs:`, `chore:`). Local commits only — never push, never
-   open PRs, never publish. The user publishes.
-2. **Never** rewrite git history, commit secrets or `.env` files, or
-   commit `node_modules/` / `.venv/` / `dist/`.
-3. **New dependencies require explicit user approval** first.
-4. **Design tokens only** — components reference `@theme` tokens, not raw
-   hex (exception: xterm theme object).
-5. **Accessibility is a gate, not a nicety**: semantic HTML, keyboard
-   support, visible focus, `prefers-reduced-motion`, contrast.
-6. **Verify before "done"**: `npm run build` must pass; for UI changes run
-   the dev server and confirm visually; for backend changes hit
-   `/api/health`.
-7. **UI work**: consult the relevant vendored skills first; run
-   `web-design-guidelines` review before signing off UI tasks.
-8. **Placeholders stay placeholders** — clearly marked; never fabricate
-   real personal data, links, or project claims.
-9. **Ask before** destructive operations, stack changes, or deleting files
-   you didn't create in the current session.
-10. Keep the README "Where things live" table and `build-concept.md`
-    accurate as the build evolves.
+1. Keep changes small, scoped, and consistent with existing patterns. Don't add
+   abstractions or dependencies for hypothetical future features.
+2. Never reset, discard, or overwrite user changes. Ask before destructive work
+   or deleting files you didn't create in the current session.
+3. Local commits only, when requested, using Conventional Commits. Never push,
+   open PRs, rewrite history, tag releases, or publish.
+4. Never commit secrets, `.env` files, `node_modules/`, or generated build output.
+5. Accessibility is a gate: semantic HTML, native links/buttons, keyboard support,
+   visible focus, reduced motion, high contrast, and responsive reflow.
+6. UI work: consult relevant vendored design skills first. Run a
+   web-design-guidelines review before sign-off.
+7. Verify before “done”: build and lint must pass; visually inspect UI changes
+   in a browser. State checks you could not perform.
+8. Keep unapproved personal content visibly marked as draft/placeholder. Never
+   fabricate personal claims, real-looking links, project details, or contacts.
+9. Keep the README and product spec current when structure or behavior changes.
+10. Don't leave a verification server occupying the user's development port.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

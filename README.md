@@ -1,70 +1,64 @@
-# mypage — a terminal/IDE personal website
+# Atif Usmani's personal website
 
-A personal website for Atif Usmani that looks like VS Code: a file explorer on
-the left, an interactive simulated terminal in the editor area, and an
-opencode-style chat panel docked below. The current runtime is a scaffold;
-the reference-driven rebuild is planned, not implemented.
+A continuous dark portfolio built with Next.js App Router, React 19, TypeScript,
+Tailwind CSS v4, and [Liquid Glass React](https://github.com/rdev/liquid-glass-react).
 
-Start with [the execution plan](docs/plans/build-plan.md),
-[baseline audit](docs/plans/codebase-audit.md), and
-[acceptance gates](docs/plans/acceptance-checklist.md).
+## Development
 
-## Structure
-
-```
-mypage/
-├── frontend/     Vite + React + TypeScript + Tailwind v4 + xterm.js
-├── backend/      FastAPI (Python) — chat API stub, wire an LLM here later
-└── docs/         plans/ (execution + audit), references/ (design evidence)
-```
-
-## Run it
-
-Frontend (terminal UI):
+Run all commands from the **repository root** (`mypage/`). Node 22 is recommended.
 
 ```bash
-cd frontend
-npm install
-npm run dev          # http://localhost:5173
+npm ci
+npm run dev          # http://localhost:3000
+npm run lint
+npm run typecheck    # after next dev or next build generates framework types
+npm run build
+npm start            # serve the production build at :3000
 ```
 
-Backend (chat API) — in a second terminal:
-
-```bash
-cd backend
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn main:app --reload --port 8000
-```
-
-The frontend dev server proxies `/api/*` to `http://localhost:8000`
-(see `frontend/vite.config.ts`). The chat works without the backend too —
-it just shows a friendly offline error.
+There is no separate backend and no required environment configuration. The old
+`frontend/` and `backend/` projects have been removed. Stop an existing dev server
+before starting another server on port 3000.
 
 ## Where things live
 
 | What | Where |
 |---|---|
-| Virtual filesystem (explorer + terminal + editor) | `frontend/src/data/filesystem.ts` |
-| Introduction copy (currently not rendered on boot) | `WELCOME_SCRIPT` in `filesystem.ts` |
-| Shell prompt (`$`) + commands | `frontend/src/components/TerminalView.tsx` |
-| Chat panel UI | `frontend/src/components/ChatPanel.tsx` |
-| Chat API / LLM wiring | `backend/main.py` (`POST /api/chat`) |
-| Theme colors | `@theme` block in `frontend/src/index.css` |
-| Design references and research sources | `docs/references/` |
-| Execution plan, audit and acceptance checklist | `docs/plans/` |
-| Current portrait conversion | `frontend/src/lib/imageToAscii.ts`, `frontend/public/headshot.png` |
-| Approved source photo for the planned generated ASCII portrait | `frontend/public/headshot.png` |
-| Unused empty ASCII file (not required from user) | `frontend/public/atif-ASCII.txt` |
-| Future workbench/chat/terminal/shared components (README-only scaffolds) | `frontend/src/components/{workbench,chat,terminal,ui}/` |
-| Future terminal/workbench logic (README-only scaffolds) | `frontend/src/lib/{terminal,workbench}/` |
-| Future backend modules (README-only scaffold) | `backend/app/` |
-| Planned test suites (README-only; no runner installed) | `frontend/tests/`, `backend/tests/` |
+| Home page and section markup | `src/app/page.tsx` |
+| Root layout and metadata | `src/app/layout.tsx` |
+| Global and responsive styles | `src/app/globals.css` |
+| Color and font tokens | `src/styles/theme.css` |
+| Header and glass navigation | `src/components/` |
+| Navigation labels and welcome copy | `src/data/site.ts` |
+| Editable About draft | `content/about.md` |
+| Public ASCII portrait | `public/images/atif-ascii.png` |
+| Design reference, original photos, and effect source | `docs/design/` |
+| Design provenance and portrait export notes | `docs/design/README.md` |
+| Product direction | `build-concept.md` |
+| Verification notes | `docs/verification.md` |
+| Contributor/agent rules | `AGENTS.md` |
 
-## Notes
+## Editing content
 
-- Adding a project later: drop a folder/file into `FILESYSTEM` in
-  `filesystem.ts` — the explorer, `ls`, `cat`, `tree` and the editor tabs all
-  pick it up automatically.
-- Hosting is not decided yet; the frontend is a standard static build
-  (`npm run build`) so it deploys anywhere. The backend is a separate service.
+Start with **[`content/about.md`](content/about.md)** to edit the About draft.
+It is intentionally **not rendered on the website** yet. Confirm the roles and
+details before replacing the live placeholder in `src/app/page.tsx`.
+
+Welcome copy and navigation labels live in `src/data/site.ts`. Other section copy
+currently lives in `src/app/page.tsx`. Contact links and project details remain
+clearly marked placeholders; no real contact destination has been supplied.
+Search indexing is disabled in the root layout until the page is ready to publish.
+
+## Design and behavior
+
+- Bold white type on a near-black page, with the supplied ASCII portrait.
+- Name at the top left; four compact, evenly spaced, transparent glass links.
+- Native anchors for About, Projects, Beyond the screen, and Contact.
+- Visible keyboard focus, a skip link, and reduced-motion support.
+- Navigation remains available without JavaScript. Safari/Firefox support only
+  part of the glass refraction effect; links do not depend on it.
+- Original source photos and compiled effect code stay in `docs/design/`, not
+  `public/`. Only the optimized portrait asset is served by the page.
+
+No tracking, visitor data collection, terminal simulation, or chat service is
+included. Dependencies and lockfile describe only the active Next.js application.

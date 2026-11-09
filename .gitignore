@@ -1,7 +1,18 @@
+# Dependencies and generated output
 node_modules/
-dist/
-.venv/
-__pycache__/
-*.pyc
-.env
+.next/
+out/
+coverage/
+next-env.d.ts
+*.tsbuildinfo
+
+# Local configuration and secrets
+.env*
+!.env.example
+
+# Logs and operating-system/editor artifacts
+*.log
 .DS_Store
+.idea/
+*.swp
+*.swo
