@@ -10,13 +10,36 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
+  themeColor: '#080a0c',
   viewportFit: 'cover',
 }
 
+// Runs before the page paints so the one-time intro never flashes final content.
+// It also fails open: if the client never finishes, the attribute clears itself.
+const introBootstrap = `
+try {
+  var seen = false;
+  try { seen = sessionStorage.getItem('intro-seen') === '1'; } catch (error) {}
+  if (location.pathname === '/' && !seen && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.dataset.intro = 'run';
+    window.setTimeout(function () {
+      if (document.documentElement.dataset.intro === 'run') {
+        document.documentElement.dataset.intro = 'static';
+      }
+    }, 12000);
+  }
+} catch (error) {}
+`
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    // The bootstrap intentionally sets data-intro before hydration. Accept only
+    // this element's attribute differences; descendants still hydrate normally.
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: introBootstrap }} />
+        {children}
+      </body>
     </html>
   )
 }

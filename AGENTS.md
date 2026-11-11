@@ -4,24 +4,23 @@ Read `build-concept.md` before making product decisions.
 
 ## Project and stack
 
-Atif Usmani's continuous dark personal page, with bold white type, an ASCII
-portrait, and compact liquid-glass section navigation.
+Atif Usmani's dark recruiter-focused résumé page, with white type and an ASCII
+portrait. One screen on desktop; readable vertical scrolling on phones.
 
 - One Next.js App Router + React 19 + TypeScript app at the repository root.
-- Tailwind CSS v4, with `liquid-glass-react` for navigation.
+- Tailwind CSS v4. No component library or glass dependency.
 - Node 22, installed via Homebrew. No separate frontend/backend projects.
 - Stack changes and new dependencies require explicit user approval.
 
 ## Structure
 
 - `src/app/`: page, root layout, metadata, and global/responsive styles.
-- `src/components/`: one React component per file, PascalCase names.
-- `src/data/site.ts`: navigation and draft welcome copy.
+- `src/data/site.ts`: compact highlights from the supplied résumé PDF.
 - `src/styles/theme.css`: `@theme` color/font tokens; the only place app colors
   are defined. Components reference tokens, not raw hex. Third-party library
   internals are not app source and must not be edited in `node_modules/`.
-- `content/about.md`: editable, unpublished About draft. Don't display it until
-  the user approves publication.
+- `content/about.md`: user-approved summary beneath the portrait, rendered as
+  one plain paragraph. Keep prose short; no Markdown formatting.
 - `public/images/`: only assets used by the public page.
 - `docs/design/`: original references/effect assets; preserve provenance/notices.
 - `.opencode/skills/`: vendored design skills; provenance in `SOURCES.md`.

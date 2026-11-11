@@ -1,76 +1,117 @@
 # Product concept — Atif Usmani's personal page
 
-This file is the current product source of truth. The terminal/IDE concept has
-been replaced; obsolete code and plans were removed with the user's approval.
-
 ## Experience
 
-One simple, continuous personal page. Clean dark surfaces, bold white lettering,
-soft gray copy, generous space, and thin dividers separate the sections. The
-visual reference is `docs/design/hero-reference.png`.
+A minimal, dark résumé page optimized for recruiters. White text, no cards,
+navigation bar, buttons, or footer. Fit on normal desktop screens; readable
+vertical scrolling is approved on phones and at large text sizes.
 
-- **Header:** “Atif Usmani” at the top left. Four compact, equally spaced,
-  individual glass navigation links occupy the remaining bar. Glass should be
-  faint and transparent without dimming the text. On narrow screens, the name
-  sits above the four links.
-- **Hero:** two bold lines, exactly “Always building.” and “Always Learning.”
-  A short placeholder welcome sits below. The supplied ASCII portrait is offset
-  right on desktop and below the copy on mobile. No icons or additional graphics.
-- **About:** personal and professional introduction.
-- **Projects:** space for supplied projects and experiments; no fabricated claims.
-- **Beyond the screen:** working title for interests outside coding and AI/ML.
-- **Contact:** space for real contact details when supplied.
-
-All navigation uses anchors on this page, not separate routes. The header stays
-visible while scrolling. Avoid decorative cards, extra labels, and animation.
-
-## Design system
-
-- Dark-only theme; native Helvetica/Arial sans-serif stack, no remote fonts.
-- Colors and font tokens are defined only in `src/styles/theme.css` with `@theme`.
-  App styles consume those tokens rather than raw colors.
-- `liquid-glass-react` supplies the navigation effect. Elastic movement and
-  chromatic aberration are disabled. Layout and readability do not depend on
-  browser-specific displacement support.
-- The portrait is a static export from the supplied UX Pilot effect. The page
-  does not execute its compiled canvas runtime. Original sources and provenance
-  remain in `docs/design/`.
+- Name tucked into the top-left corner.
+- On the first visit per tab, type “Welcome!”, “Always Building.”, and
+  “Always Learning.” as three stacked lines. Hold briefly, clear the block,
+  and drop in the résumé sections. No skip control. Reduced motion skips the intro.
+- The portrait stays hidden during typing: the initial frame shows only the name.
+  As the résumé appears, character-sized fragments of the supplied ASCII image
+  fall vertically into place over about 1.45 seconds. It settles to the original
+  still, without looping. Reduced motion, repeat visits, no JavaScript, or canvas
+  failures use the static portrait.
+- Education, Work, Leadership, Projects, Research appear in that order on the left
+  as a compact three-column index: organization, role, and a few-word summary.
+  Education is not a link. Every Work row links to the shared `/work` gallery.
+  Projects rows link to the shared `/projects` gallery. Research rows link to the
+  shared `/research` gallery, and the MTC UCI
+  leadership row links to its Instagram profile. Content comes from
+  `content/Atif_Usmani_DS_UCI_AI_ML.pdf`: all three jobs, both projects,
+  leadership, education, and both labs. No invented dates or links.
+- Detail pages reuse the dark page and cursor, show a plain “← Home” text link
+  above the entry, and skip the typing/portrait intro. Research detail pages also
+  show the supplied figures.
+- Work gallery: three equal black desktop tiles with rounded corners, layered
+  shadows, gaps, and small outer margins; vertically stacked on phones, with
+  fully visible PNG logos from `content/image-panes/work/`. Tiles show only logos;
+  each link retains an accessible experience label for assistive technology.
+  Mouse hover expands the cursor with a slowly rotating circular title: Entegris
+  Systems Engineer, Caliber Boards ML Engineer, or CUSM Data Analyst.
+  Selecting a pane opens that experience's existing details in a centered black
+  native dialog. Behind it the panes are blurred and dimmed. Outside click,
+  Close, and Escape dismiss it, restoring focus to the pane. Background scrolling
+  is locked while open; the dialog scrolls if needed. Native cursor is used in
+  the dialog. Reduced motion disables the custom cursor and rotation.
+  Existing `/experience/[slug]` routes remain direct-link/no-JavaScript fallbacks.
+- The Solar Shield and Parallax AI detail pages embed their demo through YouTube's
+  privacy-enhanced domain. Opening the page starts muted playback (browsers block
+  audible autoplay); the native player unmutes. Reduced motion loads it paused, and
+  before hydration or without JavaScript the embed is a plain YouTube link.
+- Projects gallery: two tiles matching Work, using logos from
+  `content/image-panes/projects/`, with Solar Shield and Parallax AI cursor titles.
+  Each opens a centered black popup containing its existing demo embed and a
+  brief factual description below. Muted autoplay and reduced-motion behavior
+  match the detail pages. Closing removes the player and stops playback.
+  Dismissal, blur, focus restoration, and mobile stacking match Work.
+  Existing project detail pages remain direct-link/no-JavaScript fallbacks.
+- Research gallery: two tiles matching Projects, using the supplied lab logos from
+  `content/image-panes/research/`, with BIAS Lab and Cell Universe Lab labels and
+  cursor titles. Each opens a centered black popup with the résumé role, location,
+  bullets, and the supplied figures below: one sensorimotor diagram for BIAS Lab;
+  three PCA and 3D cell views for Cell Universe Lab. Figures are statically
+  imported, so dimensions reserve space. The logo files are only about 100px, so
+  tiles cap them at 10rem instead of stretching them. Dismissal, blur, focus
+  restoration, and mobile stacking match Work. Existing research detail pages
+  remain direct-link/no-JavaScript fallbacks and show the same figures.
+- “More Life” sits at the bottom left of the homepage and opens `/more-life`:
+  three black photo tiles dealt from a newly shuffled photo order on each visit,
+  with one tile cross-fading every 1.2 seconds so no two tiles change at once.
+  The swap is a 500ms opacity fade with no movement. Titles appear only in the
+  hover cursor (no dashes); no captions or buttons. Hover pauses the strip.
+  Reduced motion stops the rotation. Phones stack the tiles.
+- ASCII portrait at the top right. The user-written `content/about.md` appears
+  as one plain paragraph directly beneath it, not as a résumé section.
+- Under the summary: plain Email, GitHub, and LinkedIn links. The approved email
+  is atifaliusmani@gmail.com, overriding the email in the résumé.
+- On phones, portrait and name lead, followed by summary, contacts, and résumé.
+  Each index entry stacks its three parts instead of narrowing into columns.
+- A white hollow circle replaces the mouse cursor on fine, hover-capable pointers.
+  No colored cursor, trailing dot, or dependency. Native cursor remains for reduced
+  motion, forced colors, touch, and when the enhancement is unavailable.
+- Contact and résumé links are white without underlines at rest. Hover and keyboard
+  focus cross-fade the text itself to a thermal gradient over 150ms, with no
+  background fill; an entire index row responds as one link. Violet #9585E0,
+  magenta #ED57AE, orange #F4511E, yellow #FFD600; violet and magenta are lightened
+  for readable text on the dark page. Keyboard focus keeps a visible outline.
+  Reduced motion removes the fade; forced colors keeps native text.
 
 ## Implementation
 
-A single Next.js App Router + React 19 + TypeScript application at the repository
-root, with Tailwind CSS v4 and Liquid Glass React. Node 22 via Homebrew.
+Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new dependencies.
 
-- `src/app/`: route, root layout, metadata, and global/responsive styles.
-- `src/components/`: one React component per file.
-- `src/data/site.ts`: section navigation and welcome text.
-- `src/styles/theme.css`: active theme only.
-- `content/about.md`: editable draft, not automatically rendered.
-- `public/images/`: assets actually served by the page.
-- `docs/design/`: supplied references and original portrait sources.
+- `src/app/`: server page, detail routes, metadata, intro bootstrap, responsive styles.
+- `src/app/[category]/[slug]/page.tsx`: one static detail page per linked entry.
+- `src/app/work/page.tsx`, `src/app/projects/page.tsx`, `src/app/research/page.tsx`, `src/components/pane-gallery.tsx`: Work, Projects, and Research galleries with shared native dialogs.
+- `src/app/more-life/page.tsx`, `src/components/photo-gallery.tsx`: More Life photo gallery; `src/data/photos.ts` holds its titles and photo list.
+- `src/data/research.ts`: research tiles, cursor titles, and figure imports/alt text.
+- `content/image-panes/work/`, `content/image-panes/projects/`, `content/image-panes/research/`: supplied logos and figures, imported statically and bundled by Next.js.
+- `content/image-panes/photos/`: supplied photo originals. `scripts/prepare-photos.mjs` writes upright 1600px JPEGs to `public/images/photos/`.
+- `src/components/opening.tsx`: typing sequence and content reveal.
+- `src/components/circle-cursor.tsx`: optional mouse-only hollow circle.
+- `src/components/falling-portrait.tsx`: one-time canvas assembly of the portrait.
+- `src/components/thermal-text.tsx`: white label plus thermal hover/focus duplicate.
+- `src/components/project-video.tsx`: lazy YouTube embed with muted autoplay.
+- `src/data/site.ts`: compact résumé index and fuller detail-page bullets from the PDF.
+- `content/about.md`: approved summary, rendered as plain text by the server.
+- `src/styles/theme.css`: all application color/font tokens.
+- `public/images/`: only public-page assets; the portrait is a static export and the
+  prepared photo copies are written there by `npm run photos`.
+- `docs/design/`: original references, source assets, and provenance.
 
-There is no backend, auth, tracking, terminal, arbitrary execution, or chat API.
-`npm run dev`, `npm run build`, `npm run lint`, `npm run typecheck`, and `npm start`
-run from the repository root. `tsconfig.json` covers the whole active application.
-
-## Content status
-
-The About draft was written from a publicly indexed LinkedIn profile and saved
-for Atif to edit. Roles and details need confirmation before publication; the
-website still shows its explicit About placeholder. Other page copy, projects,
-interests, and contact details remain visibly marked placeholders.
-
-Search indexing is disabled in metadata until publication content is approved.
-Never invent personal details, achievements, project links, or email addresses.
+No backend, analytics, auth, chat, or terminal. The two project demo embeds contact
+YouTube's privacy-enhanced domain on their detail pages and when Projects popups open. Session storage only
+remembers the intro for the current tab. Without JavaScript the full résumé renders
+immediately, with a plain link to each demo.
+Search indexing stays disabled until publication is approved.
 
 ## Quality gates
 
-- Production build, TypeScript, and lint must pass.
-- Review the rendered page on desktop and mobile after UI changes.
-- Native keyboard navigation, visible focus, a skip link, and reduced motion.
-- High-contrast text; no horizontal clipping at 320px or 200% text resize.
-- Section targets must clear the sticky header.
-- Run the vendored web-design-guidelines review before UI sign-off.
-
-Next: finalize the About draft and other personal content, confirm the working
-section title, decide hosting, and enable indexing when ready to publish.
+Build, lint, typecheck, browser inspection, and web-design-guidelines review.
+Native links, keyboard navigation, visible focus, reduced motion, high contrast,
+and responsive reflow. No horizontal clipping at 320px or 200% text size.
+Allow scrolling rather than hiding content or making résumé text unreadably small.

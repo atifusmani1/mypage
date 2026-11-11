@@ -21,7 +21,14 @@ identifiers differed. This is one canonical export, not a new effect implementat
 4. Mount into a 1400 × 1400 element and call `exportPNG({ pixelRatio: 1 })`.
 5. Save the resulting PNG to `public/images/atif-ascii.png`.
 
-The website serves an optimized still, not the canvas runtime. The effect colors
+The website serves an optimized still, not the original UX Pilot canvas runtime.
+`src/components/falling-portrait.tsx` uses a small independent canvas entrance:
+16px character-sized fragments of this existing PNG fall into their final positions
+as the résumé appears. After about 1.45 seconds, the still replaces the canvas.
+This preserves the original finished artwork rather than reinterpreting it as a
+new character set. Reduced motion and repeat visits keep the optimized still.
+
+The effect colors
 and character treatment were not changed. Original headshots and compiled source
 are intentionally outside `public/`; their files are not public app routes.
 

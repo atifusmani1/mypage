@@ -3,8 +3,16 @@
 @theme {
   --font-portfolio: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --color-page: #080a0c;
+  --color-popup: #000000;
+  --color-backdrop: #00000099;
+  --color-tile-shadow: #00000080;
+  --color-tile-edge: #ffffff1a;
   --color-heading: #ffffff;
   --color-copy: #b9bdc3;
+  --color-thermal-start: #9585e0;
+  --color-thermal-mid: #ed57ae;
+  --color-thermal-warm: #f4511e;
+  --color-thermal-end: #ffd600;
   --color-rule: #303337;
   --color-glass: #191c20;
   --color-glass-hover: #30343a;
