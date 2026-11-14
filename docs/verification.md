@@ -1,5 +1,69 @@
 # Verification record
 
+## Current update: thermal alignment and portrait size
+
+- The gradient copy and white copy now share a grid cell, fixing the offset
+  visible on résumé row hover, including the rightmost column's padded labels.
+- Portrait and summary use a narrower right-aligned desktop column, with the
+  portrait roughly 16vw wide as in the supplied sizing reference. The first
+  résumé track was adjusted so the middle column stays near its previous edge.
+- Headless Chromium hover inspection at 1440×900 confirmed white/gradient text
+  layers have identical bounds in all three columns and no doubled characters.
+  Reduced-motion screenshots at 1440×900, 1024×768, and 320×568 show the smaller
+  portrait and intact mobile stack. Build, lint, and diff whitespace checks pass.
+  Not verified: Safari/Firefox, 200% zoom, or real screen readers.
+
+## Current update: résumé right-column spacing
+
+- Inset only the rightmost desktop résumé text by 0.75rem, widening its gap to
+  the portrait/summary without moving the left and middle columns. The inset
+  resets when résumé rows stack. The corner Gallery link stays put.
+- Inspected reduced-motion Chromium screenshots at 1440×900 and 1024×768:
+  columns remain aligned and the corner link remains visible. Build, lint,
+  and diff whitespace checks pass. Phone reflow uses the existing stacked rule;
+  200% zoom and RTL were not visually retested for this small inset.
+
+## Current update: gallery timing
+
+- Gallery now changes one tile every 3 seconds (500ms opacity fade). Hover
+  freezes only the hovered tile while the other two
+  continue on the same beat; leaving resumes its rotation. Reduced-motion and
+  hidden-tab pauses remain intact.
+- The portrait and assembly canvas now use the same crop of the supplied PNG's
+  transparent side padding, putting the visible artwork against the right page
+  margin without changing the source file. Summary remains directly below it.
+- Inspected reduced-motion Chromium screenshots at 1440×900 and 390×844 on the
+  homepage, and at 1440×900 on the gallery. Build, lint, and `git diff --check`
+  pass. Hover hold timing, 200% zoom, RTL, and real screen readers were not
+  exercised in this screenshot pass.
+
+## Current update: Gallery label and homepage layout
+
+- “Gallery” replaces “Photo Gallery” in the homepage link, gallery heading,
+  and page title. The `/more-life` URL remains unchanged.
+- Restored the Gallery link to the bottom-left corner. The portrait reaches the
+  right page margin, and its summary starts directly beneath it at the same
+  width. Résumé rows use 1rem text, more vertical padding, and a right-aligned
+  third column separated from the summary by a narrow gutter.
+- At 1024px and below, section spacing tightens enough to keep the corner link
+  visible on a 1024×768 desktop; phones retain larger group gaps and stacked rows.
+- Inspected reduced-motion Chromium screenshots at 1440×900, 1024×768,
+  390×844, and 320×568. Build, lint, and `git diff --check` pass. Not verified:
+  200% zoom, RTL, Safari/Firefox, physical devices, or screen-reader output.
+
+## Current update: homepage spacing
+
+- Reduced the desktop gutter between the résumé and portrait/summary, widened
+  the summary column, and aligned the portrait with the summary's left edge.
+  The Photo Gallery link now follows Research instead of being pushed to the
+  bottom of the viewport. The dark theme remains unchanged.
+- Inspected headless Chromium screenshots at 1440×900, 1024×768, 390×844,
+  and 320×568 with reduced motion enabled. Desktop columns read closer together;
+  phones retain the stacked reading order without visible horizontal clipping.
+  The final 12px link-spacing adjustment followed those screenshots.
+- Build, lint, and diff whitespace checks pass. Not verified: 200% zoom, RTL,
+  Safari/Firefox, physical devices, or screen-reader output.
+
 ## Current review: responsive layout and gallery documentation
 
 - Research figure columns now shrink within the dialog's content width instead

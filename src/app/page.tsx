@@ -67,7 +67,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <Link className="more-life thermal-link" href="/more-life"><ThermalText>More Life</ThermalText></Link>
+        <Link className="more-life thermal-link" href="/more-life"><ThermalText>Gallery</ThermalText></Link>
       </Opening>
     </main>
   )

@@ -19,10 +19,10 @@ body { margin: 0; background: var(--color-page); color: var(--color-heading); fo
   padding-block-start: max(1rem, env(safe-area-inset-top));
   padding-block-end: max(1rem, env(safe-area-inset-bottom));
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(280px, 24vw, 350px);
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 16vw, 300px);
   grid-template-rows: auto auto 1fr auto;
   grid-template-areas: 'name identity' 'hero identity' 'details identity' 'life identity';
-  column-gap: clamp(2rem, 3vw, 4rem); row-gap: 0.75rem; align-items: start;
+  column-gap: clamp(1rem, 1.5vw, 1.5rem); row-gap: 0.75rem; align-items: start;
 }
 .site-name { grid-area: name; margin: 0; font-size: 1.25rem; line-height: 1.2; font-weight: 600; letter-spacing: -0.015em; }
 .hero { grid-area: hero; display: none; margin-block-start: 1rem; }
@@ -32,19 +32,20 @@ html[data-intro='run'] .details-shell, html[data-intro='run'] .identity-summary,
 .more-life { grid-area: life; justify-self: start; margin-block-start: 1.5rem; padding-block: 0.5rem; font-size: 0.9375rem; }
 .intro-text { min-block-size: 3.15em; margin: 0; font-size: clamp(1.75rem, 3.4vw, 3.25rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.045em; white-space: pre-line; }
 .intro-caret { display: inline-block; width: 0.085em; height: 0.92em; margin-inline-start: 0.08em; background: var(--color-heading); transform: translateY(0.08em); }
-.hero-portrait { position: relative; grid-area: portrait; width: min(100%, 34svh); justify-self: center; aspect-ratio: 1; pointer-events: none; overflow: hidden; }
+.hero-portrait { position: relative; grid-area: portrait; width: 100%; justify-self: end; aspect-ratio: 1; pointer-events: none; overflow: hidden; }
 html[data-intro='run'] .hero-portrait { visibility: hidden; }
-.portrait-fall { display: none; position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; }
+.portrait-fall { display: none; position: absolute; inset: 0; width: 140%; height: 140%; transform: translateX(-14.3%); mix-blend-mode: screen; }
 .portrait-assembling .portrait-fall { display: block; }
 .portrait-assembling .ascii-portrait { visibility: hidden; }
-.ascii-portrait { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen; }
+.ascii-portrait { width: 140%; height: 140%; max-width: none; transform: translateX(-14.3%); object-fit: contain; mix-blend-mode: screen; }
 .identity-summary { grid-area: summary; min-width: 0; font-size: 0.9375rem; line-height: 1.55; }
 .identity-summary p { margin: 0; text-wrap: pretty; overflow-wrap: anywhere; }
 .contact-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; margin-block-start: 1rem; }
 .thermal-link { color: var(--color-heading); text-decoration: none; touch-action: manipulation; }
-.thermal-text { position: relative; display: inline-block; min-width: 0; overflow-wrap: anywhere; }
+.thermal-text { display: inline-grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.thermal-copy, .thermal-label { grid-area: 1 / 1; min-width: 0; overflow-wrap: anywhere; }
 .thermal-label {
-  position: absolute; inset: 0; pointer-events: none;
+  pointer-events: none;
   background: linear-gradient(90deg, var(--color-thermal-start), var(--color-thermal-mid), var(--color-thermal-warm), var(--color-thermal-end));
   background-clip: text; -webkit-background-clip: text; color: transparent;
   opacity: 0; transition: opacity 150ms ease-out;
@@ -59,13 +60,14 @@ html[data-intro='run'] .hero-portrait { visibility: hidden; }
 .detail h2 { margin: 0; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
 .detail-copy { margin: 0; padding: 0; list-style: none; min-width: 0; display: grid; gap: 0.25rem; }
 .resume-row {
-  display: grid; grid-template-columns: minmax(6.5rem, 0.8fr) minmax(0, 1.65fr) minmax(0, 1.45fr);
+  display: grid; grid-template-columns: minmax(6.5rem, 0.7fr) minmax(0, 1.65fr) minmax(0, 1.45fr);
   column-gap: clamp(1rem, 2vw, 2rem); align-items: baseline;
-  padding-block: clamp(0.4rem, 1vh, 0.6rem);
-  font-size: 0.875rem; line-height: 1.45;
+  padding-block: clamp(0.5rem, 1vh, 0.625rem);
+  font-size: 1rem; line-height: 1.45;
 }
 .resume-row > :first-child { font-weight: 600; }
 .resume-row > span { min-width: 0; overflow-wrap: anywhere; }
+.resume-row > :last-child { text-align: end; padding-inline-end: 0.75rem; }
 .detail-page { padding-block: 2rem 4rem; }
 .back-link { display: inline-block; padding-block: 0.5rem; }
 .detail-page article { max-width: 48rem; margin-block-start: clamp(2rem, 8vh, 5rem); }
@@ -154,7 +156,8 @@ html:has(.work-dialog[open]) .circle-cursor { display: none; }
   html[data-intro='done'] .detail:nth-child(5) { animation-delay: 280ms; }
 }
 @media (max-width: 1050px) {
-  .opening-inner { column-gap: 1.75rem; grid-template-columns: minmax(0, 1fr) 280px; }
+  .opening-inner { column-gap: 1rem; grid-template-columns: minmax(0, 1fr) 220px; }
+  .details { gap: clamp(1.25rem, 2.5vh, 1.75rem); }
 }
 @media (max-width: 760px) {
   .opening-inner { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto auto auto; grid-template-areas: 'name identity' 'hero hero' 'summary summary' 'details details' 'life life'; gap: 0.75rem 1rem; }
@@ -165,7 +168,9 @@ html:has(.work-dialog[open]) .circle-cursor { display: none; }
   .hero-portrait { grid-area: identity; width: clamp(120px, 30vw, 160px); }
   .identity-summary { font-size: 0.9375rem; }
   .details-shell { grid-area: details; margin-block-start: 0.75rem; }
+  .details { gap: clamp(1.5rem, 4vh, 2rem); }
   .resume-row { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .resume-row > :last-child { text-align: start; padding-inline-end: 0; }
   .detail-copy { gap: 0.9rem; }
   .photo-panes { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .photo-pane { aspect-ratio: auto; max-height: none; }
@@ -173,6 +178,7 @@ html:has(.work-dialog[open]) .circle-cursor { display: none; }
 }
 @container (max-width: 34rem) {
   .resume-row { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .resume-row > :last-child { text-align: start; padding-inline-end: 0; }
   .detail-copy { gap: 0.9rem; }
 }
 @media (forced-colors: active) {

@@ -7,7 +7,7 @@ import { photos } from '@/data/photos'
 import { CircleCursor } from './circle-cursor'
 import { ThermalText } from './thermal-text'
 
-const TICK_MS = 1200
+const TICK_MS = 3000
 const FADE_MS = 500
 const CLEAR_MS = FADE_MS + 200
 const paneCount = 3
@@ -30,6 +30,7 @@ export function PhotoGallery() {
   const [panes, setPanes] = useState(dealPhotos)
   const [slots, setSlots] = useState<Slot[]>(() => Array.from({ length: paneCount }, () => ({ current: 0, previous: null })))
   const [hovered, setHovered] = useState<number | null>(null)
+  const hoveredPane = useRef<number | null>(null)
   const tick = useRef(0)
   const clearTimers = useRef<ReturnType<typeof setTimeout>[]>([])
 
@@ -38,11 +39,11 @@ export function PhotoGallery() {
     return () => clearTimeout(timer)
   }, [])
 
-  // One pane changes at a time, a beat apart, so the strip never flickers as a block.
+  // One pane changes per beat; hovering holds only that pane, not the strip.
   useEffect(() => {
-    if (hovered !== null) return
     const timer = setInterval(() => {
       if (document.hidden || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      if (tick.current % paneCount === hoveredPane.current) tick.current += 1
       const index = tick.current % paneCount
       tick.current += 1
       setSlots(value => value.map((slot, pane) => pane === index
@@ -53,7 +54,7 @@ export function PhotoGallery() {
       }, CLEAR_MS))
     }, TICK_MS)
     return () => clearInterval(timer)
-  }, [hovered, panes])
+  }, [panes])
 
   useEffect(() => () => clearTimers.current.forEach(clearTimeout), [])
 
@@ -63,15 +64,15 @@ export function PhotoGallery() {
     <CircleCursor label={hovered === null ? '' : current[hovered].title} />
     <header className="work-header page-width">
       <Link className="thermal-link back-link" href="/"><ThermalText>← Home</ThermalText></Link>
-      <h1>More Life</h1>
+      <h1>Gallery</h1>
     </header>
     <div className="photo-panes">
       {slots.map((slot, index) => {
         const photo = panes[index][slot.current]
         const previous = slot.previous === null ? null : panes[index][slot.previous]
         return <div className="photo-pane" key={index}
-          onPointerEnter={event => { if (event.pointerType === 'mouse') setHovered(index) }}
-          onPointerLeave={() => setHovered(null)}>
+          onPointerEnter={event => { if (event.pointerType === 'mouse') { hoveredPane.current = index; setHovered(index) } }}
+          onPointerLeave={() => { hoveredPane.current = null; setHovered(null) }}>
           <div className="photo-pane-image">
             <Image src={photo.src} alt={photo.title} fill sizes="(max-width: 760px) 92vw, 31vw" priority={slot.current === 0} />
             {previous && <Image key={previous.src} className="photo-fading" src={previous.src} alt="" fill sizes="(max-width: 760px) 92vw, 31vw" />}

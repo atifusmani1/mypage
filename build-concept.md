@@ -58,14 +58,23 @@ vertical scrolling is approved on phones and at large text sizes.
   tiles cap them at 10rem instead of stretching them. Dismissal, blur, focus
   restoration, and mobile stacking match Work. Existing research detail pages
   remain direct-link/no-JavaScript fallbacks and show the same figures.
-- “More Life” sits at the bottom left of the homepage and opens `/more-life`:
+- “Gallery” sits in the homepage's bottom-left corner, below the résumé with
+  breathing room, and opens `/more-life`:
   three black photo tiles dealt from a newly shuffled photo order on each visit,
-  with one tile cross-fading every 1.2 seconds so no two tiles change at once.
+  with one tile cross-fading every 3 seconds so no two tiles change at once.
   The swap is a 500ms opacity fade with no movement. Titles appear only in the
-  hover cursor (no dashes); no captions or buttons. Hover pauses the strip.
+  hover cursor (no dashes); no captions or buttons. Hover holds that tile while
+  the other two keep changing.
   Reduced motion stops the rotation. Phones stack the tiles.
-- ASCII portrait at the top right. The user-written `content/about.md` appears
-  as one plain paragraph directly beneath it, not as a résumé section.
+- ASCII portrait is a compact, roughly 16vw square on desktop, with its visible
+  artwork aligned to the right page margin by cropping transparent padding in
+  its frame; its intro canvas uses the same crop. The user-written
+  `content/about.md` appears directly beneath it at the same width, as one plain
+  paragraph rather than a résumé section.
+- Résumé rows have readable text and room between entries; the rightmost column
+  sits slightly left of the portrait/summary, separated by a modest gutter.
+  On narrow screens, each row
+  stacks in normal reading order and the Gallery link follows the final entry.
 - Under the summary: plain Email, GitHub, and LinkedIn links. The approved email
   is atifaliusmani@gmail.com, overriding the email in the résumé.
 - On phones, portrait and name lead, followed by summary, contacts, and résumé.
@@ -75,7 +84,8 @@ vertical scrolling is approved on phones and at large text sizes.
   motion, forced colors, touch, and when the enhancement is unavailable.
 - Contact and résumé links are white without underlines at rest. Hover and keyboard
   focus cross-fade the text itself to a thermal gradient over 150ms, with no
-  background fill; an entire index row responds as one link. Violet #9585E0,
+  background fill; both text layers share the same cell so they stay aligned.
+  An entire index row responds as one link. Violet #9585E0,
   magenta #ED57AE, orange #F4511E, yellow #FFD600; violet and magenta are lightened
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
@@ -87,7 +97,7 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `src/app/`: server page, detail routes, metadata, intro bootstrap, responsive styles.
 - `src/app/[category]/[slug]/page.tsx`: one static detail page per linked entry.
 - `src/app/work/page.tsx`, `src/app/projects/page.tsx`, `src/app/research/page.tsx`, `src/components/pane-gallery.tsx`: Work, Projects, and Research galleries with shared native dialogs.
-- `src/app/more-life/page.tsx`, `src/components/photo-gallery.tsx`: More Life photo gallery; `src/data/photos.ts` holds its titles and photo list.
+- `src/app/more-life/page.tsx`, `src/components/photo-gallery.tsx`: Gallery at `/more-life`; `src/data/photos.ts` holds its titles and photo list.
 - `src/data/research.ts`: research tiles, cursor titles, and figure imports/alt text.
 - `content/image-panes/work/`, `content/image-panes/projects/`, `content/image-panes/research/`: supplied logos and figures, imported statically and bundled by Next.js.
 - `content/image-panes/photos/`: supplied photo originals. `scripts/prepare-photos.mjs` writes upright 1600px JPEGs to `public/images/photos/`.
