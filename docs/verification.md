@@ -1,7 +1,7 @@
 # Verification record
 
 This is a chronological record of earlier checks, not a current test report.
-For current behavior and file locations, see `build-concept.md` and `README.md`.
+For current behavior and file locations, see `README.md` and the source files.
 
 ## Current update: thermal alignment and portrait size
 
@@ -74,10 +74,10 @@ For current behavior and file locations, see `build-concept.md` and `README.md`.
   use the same figure grid.
 - More Life deals a shuffled photo list on each visit and changes one pane every
   1.2 seconds. Rotation now stops under reduced motion; the 500ms opacity fade
-  and hover pause remain unchanged. README and product spec reflect this behavior.
+  and hover pause remain unchanged. At the time, README and the former product spec reflected this behavior.
 - The older update records below document the state at the time of each change;
-  they are not current behavior specifications. The README and `build-concept.md`
-  describe the current site.
+  they are not current behavior specifications. See the README and source files
+  for the current site.
 - Renamed the misspelled `cell-universse/` research folder to `cell-universe/`
   and updated its imports. Original photo and design provenance assets remain
   untouched; no source files were deleted.
@@ -168,8 +168,8 @@ For current behavior and file locations, see `build-concept.md` and `README.md`.
 - Checked both video IDs, iframe titles, `allow` policy, autoplay/mute parameters,
   reduced-motion behavior, mobile reflow, and no horizontal overflow in Chromium.
   YouTube player assets loaded and playback advanced in the headless browser.
-- Build, lint, and typecheck pass. Third-party YouTube requests are documented in
-  README/build-concept; no new dependencies.
+- Build, lint, and typecheck pass. Third-party YouTube requests were documented in
+  the README and former build concept; no new dependencies.
 - Not verified: audible autoplay (deliberately muted), Safari/Firefox, signed-out or
   regional YouTube restrictions, or actual screen-reader output.
 
@@ -259,7 +259,7 @@ there are no new dependencies or copied unlicensed cursor sources.
   list entries, native links, decorative image dimensions/preload, token colors,
   safe-area insets, hover-capability gates, reduced motion, and visible focus.
   No navigation precedes main, so no main-content bypass link is needed.
-- Approved thermal values are retained in theme tokens and the product spec;
+- Approved thermal values were retained in theme tokens and the former product spec;
   the temporary reference screenshot was deleted with the user's permission.
 
 Not verified in this revision: Safari/Firefox, real screen readers, physical

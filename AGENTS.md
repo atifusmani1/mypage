@@ -1,6 +1,6 @@
 # AGENTS.md — repository rules
 
-Read `build-concept.md` before making product decisions.
+Read `README.md` before making product decisions.
 
 ## Project and stack
 
@@ -26,7 +26,6 @@ on phones.
 - `docs/design/`: original references/effect assets; preserve provenance/notices.
 - `.opencode/skills/`: vendored design skills; provenance in `SOURCES.md`.
 - `README.md`: commands and the “Where things live” table.
-- `build-concept.md`: current product spec; keep it accurate.
 
 ## Commands (repository root)
 
@@ -55,7 +54,7 @@ npm start            # serve the production build
    in a browser. State checks you could not perform.
 8. Keep unapproved personal content visibly marked as draft/placeholder. Never
    fabricate personal claims, real-looking links, project details, or contacts.
-9. Keep the README and product spec current when structure or behavior changes.
+9. Keep the README current when structure or behavior changes.
 10. Don't leave a verification server occupying the user's development port.
 
 <!-- BEGIN:nextjs-agent-rules -->
