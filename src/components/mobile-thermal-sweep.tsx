@@ -30,12 +30,12 @@ export function MobileThermalSweep() {
       fadeTimer = setTimeout(() => {
         link.classList.remove('thermal-sweep')
         active = undefined
-      }, 230)
+      }, 300)
 
       timer = setTimeout(() => {
         index += 1
         step()
-      }, 300)
+      }, 370)
     }
 
     function start() {

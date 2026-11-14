@@ -95,8 +95,8 @@ scrolling is approved on phones and at large text sizes.
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
 - On touch-only phones, two seconds after the intro clears (or the page opens
-  on a repeat visit), the thermal link effect briefly sweeps once from contacts
-  through résumé links to Gallery, finishing in under five seconds. It does not
+  on a repeat visit), the thermal link effect sweeps once from contacts
+  through résumé links to Gallery, taking about five seconds. It does not
   auto-scroll or loop and pauses while the tab is hidden. Reduced motion and
   forced colors skip the sweep.
 

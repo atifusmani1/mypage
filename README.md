@@ -126,8 +126,8 @@ Search indexing remains disabled until publication is approved.
 - Text is white; contact and résumé links have no underline and fade to
   thermal-colored text on hover/focus, with no background highlight. Keyboard
   focus keeps a visible outline.
-- On touch-only phones, the thermal text effect briefly sweeps through the links
-  once after the intro, without a looping animation or pause control.
+- On touch-only phones, the thermal text effect sweeps through the links once
+  over about five seconds after the intro, without a loop or pause control.
 - A white hollow-circle mouse cursor; native cursor on touch, reduced motion, and forced colors.
 - Portrait hidden during typing; its existing glyph-sized image fragments fall
   into place with the résumé reveal, then settle into the static PNG. No looping;
