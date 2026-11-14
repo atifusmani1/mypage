@@ -3,9 +3,8 @@
 ## Experience
 
 A minimal, dark résumé page optimized for recruiters. White text, no cards,
-navigation bar, or footer; only the mobile thermal effect has a small pause
-button. Fit on normal desktop screens; readable vertical scrolling is approved
-on phones and at large text sizes.
+navigation bar, or footer. Fit on normal desktop screens; readable vertical
+scrolling is approved on phones and at large text sizes.
 
 - Name tucked into the top-left corner.
 - On the first visit per tab, type “Welcome!”, “Always Building.”, and
@@ -96,10 +95,10 @@ on phones and at large text sizes.
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
 - On touch-only phones, two seconds after the intro clears (or the page opens
-  on a repeat visit), the thermal link effect slowly sweeps from contacts through
-  résumé links to Gallery, then back up, looping. It does not auto-scroll, pauses
-  while the tab is hidden, and has a small Pause/Resume control beneath the
-  contacts. Reduced motion and forced colors skip the sweep and its control.
+  on a repeat visit), the thermal link effect briefly sweeps once from contacts
+  through résumé links to Gallery, finishing in under five seconds. It does not
+  auto-scroll or loop and pauses while the tab is hidden. Reduced motion and
+  forced colors skip the sweep.
 
 ## Implementation
 
@@ -116,7 +115,7 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `src/components/circle-cursor.tsx`: optional mouse-only hollow circle.
 - `src/components/portrait.tsx`: static ASCII portrait with responsive image sizing.
 - `src/components/thermal-text.tsx`: white label plus thermal hover/focus duplicate.
-- `src/components/mobile-thermal-sweep.tsx`: looping mobile thermal preview and pause control.
+- `src/components/mobile-thermal-sweep.tsx`: brief one-time mobile thermal preview.
 - `src/components/project-video.tsx`: lazy YouTube embed with muted autoplay.
 - `src/components/resume-popup.tsx`: homepage PDF preview dialog and download link.
 - `src/data/site.ts`: compact résumé index and fuller detail-page bullets from the PDF.

@@ -51,11 +51,9 @@ html[data-intro='run'] .hero-portrait { visibility: hidden; }
 @media (hover: hover) {
   .thermal-link:hover .thermal-label { opacity: 1; }
 }
-.thermal-sweep-toggle { display: none; }
 @media (max-width: 760px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-  .thermal-label { transition-duration: 350ms; transition-timing-function: ease-in-out; }
+  .thermal-label { transition-duration: 120ms; }
   .thermal-link.thermal-sweep .thermal-label { opacity: 1; }
-  .thermal-sweep-toggle { display: block; margin-block-start: 0.75rem; padding: 0.5rem 0; border: 0; background: none; color: var(--color-heading); font: inherit; text-decoration: underline; text-underline-offset: 0.2em; touch-action: manipulation; }
 }
 .details-shell { grid-area: details; min-width: 0; margin-block-start: 1rem; container-type: inline-size; }
 .details { display: grid; gap: clamp(1.3rem, 4vh, 2.75rem); }

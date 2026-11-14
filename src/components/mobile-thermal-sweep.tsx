@@ -1,31 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 
-/** Touch-only thermal hover preview, sweeping down and back up the links. */
+/** Brief, one-time touch-only preview of the link hover treatment. */
 export function MobileThermalSweep() {
-  const [available, setAvailable] = useState(false)
-  const [playing, setPlaying] = useState(true)
-  const position = useRef(0)
-  const direction = useRef(1)
-  const startedOnce = useRef(false)
-
   useEffect(() => {
     const mobile = window.matchMedia('(max-width: 760px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) and (forced-colors: none)')
-    function update() { setAvailable(mobile.matches) }
-    update()
-    mobile.addEventListener('change', update)
-    return () => mobile.removeEventListener('change', update)
-  }, [])
-
-  useEffect(() => {
-    if (!available || !playing) return
-
     const links = Array.from(document.querySelectorAll<HTMLElement>(
       '.opening-inner .contact-links .thermal-link, .opening-inner .details .thermal-link, .opening-inner .more-life',
     ))
-    if (!links.length) return
-
+    let index = 0
     let timer: ReturnType<typeof setTimeout> | undefined
     let fadeTimer: ReturnType<typeof setTimeout> | undefined
     let active: HTMLElement | undefined
@@ -39,54 +23,51 @@ export function MobileThermalSweep() {
     }
 
     function step() {
-      if (document.hidden) return
-      const link = links[position.current]
+      if (document.hidden || !mobile.matches || index >= links.length) return
+      const link = links[index]
       active = link
       link.classList.add('thermal-sweep')
       fadeTimer = setTimeout(() => {
         link.classList.remove('thermal-sweep')
         active = undefined
-      }, 1050)
+      }, 230)
 
       timer = setTimeout(() => {
-        if (position.current === links.length - 1) direction.current = -1
-        else if (position.current === 0) direction.current = 1
-        position.current += direction.current
+        index += 1
         step()
-      }, 1350)
+      }, 300)
     }
 
     function start() {
       if (document.documentElement.dataset.intro === 'run') return
       intro.disconnect()
       ready = true
-      if (!document.hidden) {
-        timer = setTimeout(step, startedOnce.current ? 0 : 2000)
-        startedOnce.current = true
-      }
+      if (mobile.matches && !document.hidden) timer = setTimeout(step, 2000)
     }
 
     function onVisibilityChange() {
       if (document.hidden) clearStep()
-      else if (ready) timer = setTimeout(step, 350)
+      else if (ready && mobile.matches && index < links.length) timer = setTimeout(step, 350)
+    }
+
+    function onMobileChange() {
+      clearStep()
+      if (ready && mobile.matches && !document.hidden && index < links.length) timer = setTimeout(step, 350)
     }
 
     const intro = new MutationObserver(start)
     intro.observe(document.documentElement, { attributes: true, attributeFilter: ['data-intro'] })
     start()
     document.addEventListener('visibilitychange', onVisibilityChange)
+    mobile.addEventListener('change', onMobileChange)
 
     return () => {
       clearStep()
       intro.disconnect()
       document.removeEventListener('visibilitychange', onVisibilityChange)
+      mobile.removeEventListener('change', onMobileChange)
     }
-  }, [available, playing])
+  }, [])
 
-  if (!available) return null
-  return (
-    <button className="thermal-sweep-toggle" type="button" onClick={() => setPlaying(value => !value)}>
-      {playing ? 'Pause thermal effect' : 'Resume thermal effect'}
-    </button>
-  )
+  return null
 }
