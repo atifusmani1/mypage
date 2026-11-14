@@ -122,12 +122,14 @@ Search indexing remains disabled until publication is approved.
   privacy-enhanced player. Opening the page starts playback muted, since browsers
   block audible autoplay; the player controls unmute. Reduced motion loads the
   player paused, and a plain YouTube link is shown before hydration or without JS.
-- On phones, each index entry stacks its three parts; nothing is clipped.
+- On phones, each index entry retains three columns with smaller text wrapping
+  within each cell; nothing is clipped.
 - Text is white; contact and résumé links have no underline and fade to
   thermal-colored text on hover/focus, with no background highlight. Keyboard
   focus keeps a visible outline.
-- On touch-only phones, the thermal text effect sweeps through the links once
-  over about five seconds after the intro, without a loop or pause control.
+- On touch-only phones, the thermal text effect highlights Entegris and the
+  other two Work links for about one second each after the intro. It skips
+  contacts, does not loop, and has no pause control.
 - A white hollow-circle mouse cursor; native cursor on touch, reduced motion, and forced colors.
 - Portrait hidden during typing; its existing glyph-sized image fragments fall
   into place with the résumé reveal, then settle into the static PNG. No looping;

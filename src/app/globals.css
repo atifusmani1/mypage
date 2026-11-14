@@ -52,7 +52,7 @@ html[data-intro='run'] .hero-portrait { visibility: hidden; }
   .thermal-link:hover .thermal-label { opacity: 1; }
 }
 @media (max-width: 760px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
-  .thermal-label { transition-duration: 160ms; }
+  .thermal-label { transition-duration: 250ms; }
   .thermal-link.thermal-sweep .thermal-label { opacity: 1; }
 }
 .details-shell { grid-area: details; min-width: 0; margin-block-start: 1rem; container-type: inline-size; }
@@ -181,17 +181,14 @@ html:has(.work-dialog[open], .resume-dialog[open]) .circle-cursor { display: non
   .identity-summary { font-size: 0.9375rem; }
   .details-shell { grid-area: details; margin-block-start: 0.75rem; }
   .details { gap: clamp(1.5rem, 4vh, 2rem); }
-  .resume-row { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
-  .resume-row > :last-child { text-align: start; padding-inline-end: 0; }
-  .detail-copy { gap: 0.9rem; }
   .photo-panes { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .photo-pane { aspect-ratio: auto; max-height: none; }
   .photo-pane-image { aspect-ratio: 4 / 5; }
 }
-@container (max-width: 34rem) {
-  .resume-row { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
-  .resume-row > :last-child { text-align: start; padding-inline-end: 0; }
-  .detail-copy { gap: 0.9rem; }
+@container (max-width: 46rem) {
+  .resume-row { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr) minmax(0, 1.15fr); column-gap: clamp(0.4rem, 1.4vw, 0.8rem); font-size: clamp(0.75rem, 2.5vw, 0.9375rem); }
+  .resume-row > :last-child { padding-inline-end: 0; }
+  .detail-copy { gap: 0.5rem; }
 }
 @media (forced-colors: active) {
   .thermal-label { display: none; }

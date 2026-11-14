@@ -74,8 +74,8 @@ scrolling is approved on phones and at large text sizes.
 - Résumé rows have readable text and room between entries; the rightmost column
   stays right-aligned but sits farther left, leaving more space before the
   portrait/summary.
-  On narrow screens, each row
-  stacks in normal reading order and the Gallery link follows the final entry.
+  On narrow screens, the three columns stay side by side with smaller text
+  wrapping within each cell; the Gallery link follows the final entry.
 - Under the summary: plain Email, GitHub, LinkedIn, and Resume links. Resume
   opens a centered PDF preview in a native dialog, with Download and Close actions.
   Outside click and Escape also dismiss it, restoring focus to Resume. Without
@@ -83,7 +83,7 @@ scrolling is approved on phones and at large text sizes.
   from `content/Atif_Usmani_UCI_DS_AI_ML.pdf`.
   The approved email is atifaliusmani@gmail.com, overriding the email in the résumé.
 - On phones, portrait and name lead, followed by summary, contacts, and résumé.
-  Each index entry stacks its three parts instead of narrowing into columns.
+  Each index entry keeps its three columns rather than stacking its parts.
 - A white hollow circle replaces the mouse cursor on fine, hover-capable pointers.
   No colored cursor, trailing dot, or dependency. Native cursor remains for reduced
   motion, forced colors, touch, and when the enhancement is unavailable.
@@ -95,10 +95,10 @@ scrolling is approved on phones and at large text sizes.
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
 - On touch-only phones, two seconds after the intro clears (or the page opens
-  on a repeat visit), the thermal link effect sweeps once from contacts
-  through résumé links to Gallery, taking about five seconds. It does not
-  auto-scroll or loop and pauses while the tab is hidden. Reduced motion and
-  forced colors skip the sweep.
+  on a repeat visit), the thermal link effect highlights only the three Work
+  links, starting with Entegris and spending about one second on each. It does
+  not auto-scroll or loop and pauses while the tab is hidden. Reduced motion
+  and forced colors skip the sweep; there is no pause control.
 
 ## Implementation
 

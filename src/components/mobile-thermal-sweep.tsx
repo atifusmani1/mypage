@@ -2,12 +2,12 @@
 
 import { useEffect } from 'react'
 
-/** Brief, one-time touch-only preview of the link hover treatment. */
+/** Brief, one-time touch-only preview of the Work links. */
 export function MobileThermalSweep() {
   useEffect(() => {
     const mobile = window.matchMedia('(max-width: 760px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) and (forced-colors: none)')
     const links = Array.from(document.querySelectorAll<HTMLElement>(
-      '.opening-inner .contact-links .thermal-link, .opening-inner .details .thermal-link, .opening-inner .more-life',
+      '.opening-inner .detail[aria-labelledby="work-title"] .resume-row.thermal-link',
     ))
     let index = 0
     let timer: ReturnType<typeof setTimeout> | undefined
@@ -30,12 +30,12 @@ export function MobileThermalSweep() {
       fadeTimer = setTimeout(() => {
         link.classList.remove('thermal-sweep')
         active = undefined
-      }, 300)
+      }, 750)
 
       timer = setTimeout(() => {
         index += 1
         step()
-      }, 370)
+      }, 1000)
     }
 
     function start() {
