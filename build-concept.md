@@ -66,13 +66,14 @@ vertical scrolling is approved on phones and at large text sizes.
   hover cursor (no dashes); no captions or buttons. Hover holds that tile while
   the other two keep changing.
   Reduced motion stops the rotation. Phones stack the tiles.
-- ASCII portrait is a compact, roughly 16vw square on desktop, with its visible
-  artwork aligned to the right page margin by cropping transparent padding in
-  its frame; its intro canvas uses the same crop. The user-written
+- ASCII portrait is a compact, roughly 17vw square on desktop, with its visible
+  artwork slightly inset from the right page margin by cropping transparent
+  padding in its frame; its intro canvas uses the same crop. The user-written
   `content/about.md` appears directly beneath it at the same width, as one plain
-  paragraph rather than a résumé section.
+  paragraph with relaxed line spacing rather than a résumé section.
 - Résumé rows have readable text and room between entries; the rightmost column
-  sits slightly left of the portrait/summary, separated by a modest gutter.
+  stays right-aligned but sits farther left, leaving more space before the
+  portrait/summary.
   On narrow screens, each row
   stacks in normal reading order and the Gallery link follows the final entry.
 - Under the summary: plain Email, GitHub, and LinkedIn links. The approved email
@@ -89,6 +90,10 @@ vertical scrolling is approved on phones and at large text sizes.
   magenta #ED57AE, orange #F4511E, yellow #FFD600; violet and magenta are lightened
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
+- On touch-only phones, two seconds after the intro clears (or the page opens
+  on a repeat visit), the thermal link effect passes once from contacts through
+  résumé links to Gallery. Each link lights up briefly when it enters view; the
+  page never auto-scrolls. Reduced motion and forced colors skip the sweep.
 
 ## Implementation
 
@@ -105,6 +110,7 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `src/components/circle-cursor.tsx`: optional mouse-only hollow circle.
 - `src/components/falling-portrait.tsx`: one-time canvas assembly of the portrait.
 - `src/components/thermal-text.tsx`: white label plus thermal hover/focus duplicate.
+- `src/components/mobile-thermal-sweep.tsx`: one-time, in-view mobile thermal preview.
 - `src/components/project-video.tsx`: lazy YouTube embed with muted autoplay.
 - `src/data/site.ts`: compact résumé index and fuller detail-page bullets from the PDF.
 - `content/about.md`: approved summary, rendered as plain text by the server.

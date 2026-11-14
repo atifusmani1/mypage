@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import { MobileThermalSweep } from './mobile-thermal-sweep'
 
 const PHRASES = ['Welcome!', 'Always Building.', 'Always Learning.']
 const TYPE_MS = 55
@@ -98,6 +99,7 @@ export function Opening({ summary, portrait, children }: OpeningProps) {
 
   return (
     <div className="opening-inner page-width">
+      <MobileThermalSweep />
       <h1 className="site-name" translate="no">Atif Usmani</h1>
 
       <div className="hero">
