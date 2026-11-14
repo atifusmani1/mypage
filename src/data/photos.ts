@@ -1,6 +1,7 @@
 export type Photo = { src: string; title: string }
 
-// Generated from content/image-panes/photos/ by scripts/prepare-photos.mjs.
+// JPEGs are prepared from content/image-panes/photos/ by scripts/prepare-photos.mjs.
+// Keep this hand-picked list in sync with the prepared files in public/images/photos/.
 // The gallery shuffles this list on each visit, then deals it across three panes.
 export const photos: Photo[] = [
   { src: '/images/photos/angels-landing-summit.jpg', title: 'Angels Landing Summit' },
@@ -16,7 +17,6 @@ export const photos: Photo[] = [
   { src: '/images/photos/yemeni-coffee-shop.jpg', title: 'Yemeni Coffee Shop' },
   { src: '/images/photos/blue-bikes-in-the-city.jpg', title: 'Blue Bikes In The City' },
   { src: '/images/photos/my-lazy-cat.jpg', title: 'My Lazy Cat' },
-  { src: '/images/photos/brothy-chicken-bowl.jpg', title: 'Brothy Chicken Bowl' },
   { src: '/images/photos/mit-lab.jpg', title: 'MIT Lab' },
   { src: '/images/photos/angels-landing.jpg', title: 'Angels Landing' },
   { src: '/images/photos/mini-golf-lock-in.jpg', title: 'Mini Golf Lock In' },

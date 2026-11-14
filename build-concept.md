@@ -20,7 +20,7 @@ scrolling is approved on phones and at large text sizes.
   Projects rows link to the shared `/projects` gallery. Research rows link to the
   shared `/research` gallery, and the MTC UCI
   leadership row links to its Instagram profile. Content comes from
-  `content/Atif_Usmani_DS_UCI_AI_ML.pdf`: all three jobs, both projects,
+  `content/Atif_Usmani_UCI_DS_AI_ML.pdf`: all three jobs, both projects,
   leadership, education, and both labs. No invented dates or links.
 - Detail pages reuse the dark page and cursor, show a plain “← Home” text link
   above the entry, and skip the typing/portrait intro. Research detail pages also
@@ -108,6 +108,7 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `src/app/[category]/[slug]/page.tsx`: one static detail page per linked entry.
 - `src/app/work/page.tsx`, `src/app/projects/page.tsx`, `src/app/research/page.tsx`, `src/components/pane-gallery.tsx`: Work, Projects, and Research galleries with shared native dialogs.
 - `src/app/more-life/page.tsx`, `src/components/photo-gallery.tsx`: Gallery at `/more-life`; `src/data/photos.ts` holds its titles and photo list.
+- `src/data/panes.ts`: Work and Projects tile logos and labels, plus the shared pane type.
 - `src/data/research.ts`: research tiles, cursor titles, and figure imports/alt text.
 - `content/image-panes/work/`, `content/image-panes/projects/`, `content/image-panes/research/`: supplied logos and figures, imported statically and bundled by Next.js.
 - `content/image-panes/photos/`: supplied photo originals. `scripts/prepare-photos.mjs` writes upright 1600px JPEGs to `public/images/photos/`.

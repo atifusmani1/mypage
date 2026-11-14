@@ -1,5 +1,8 @@
 # Verification record
 
+This is a chronological record of earlier checks, not a current test report.
+For current behavior and file locations, see `build-concept.md` and `README.md`.
+
 ## Current update: thermal alignment and portrait size
 
 - The gradient copy and white copy now share a grid cell, fixing the offset

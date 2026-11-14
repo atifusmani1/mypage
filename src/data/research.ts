@@ -1,5 +1,5 @@
 import type { StaticImageData } from 'next/image'
-import type { GalleryPane } from '@/components/pane-gallery'
+import type { GalleryPane } from '@/data/panes'
 import biasLogo from '../../content/image-panes/research/bias-lab/bias-lab-removebg-preview.png'
 import sensorimotorDemo from '../../content/image-panes/research/bias-lab/sensorimotor-demo.png'
 import cellLogo from '../../content/image-panes/research/cell-universe/cell-universe-removebg-preview.png'

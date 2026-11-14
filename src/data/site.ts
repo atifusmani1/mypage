@@ -1,4 +1,4 @@
-// All factual detail comes from content/Atif_Usmani_DS_UCI_AI_ML.pdf.
+// All factual detail comes from content/Atif_Usmani_UCI_DS_AI_ML.pdf.
 type ResumeEntry = { name: string; role: string; summary: string; href?: string; external?: boolean }
 
 export const resumeSections: { title: string; entries: ResumeEntry[] }[] = [
