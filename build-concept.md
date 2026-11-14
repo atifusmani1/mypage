@@ -7,11 +7,12 @@ navigation bar, or footer. Fit on normal desktop screens; readable vertical
 scrolling is approved on phones and at large text sizes.
 
 - Name tucked into the top-left corner.
+- Browser tab title is “Atif Usmani” on every page.
 - On the first visit per tab, type “Welcome!”, “Always Building.”, and
   “Always Learning.” as three stacked lines. Hold briefly, clear the block,
   and drop in the résumé sections. No skip control. Reduced motion skips the intro.
 - The portrait stays hidden during typing: the initial frame shows only the name.
-  As the résumé appears, the supplied ASCII image appears all at once. Reduced
+  As the résumé appears, the supplied photo appears all at once. Reduced
   motion, repeat visits, and no JavaScript use the same still portrait.
 - Education, Work, Leadership, Projects, Research appear in that order on the left
   with breathing room below the name, as a compact three-column index:
@@ -66,9 +67,8 @@ scrolling is approved on phones and at large text sizes.
   hover cursor (no dashes); no captions or buttons. Hover holds that tile while
   the other two keep changing.
   Reduced motion stops the rotation. Phones stack the tiles.
-- ASCII portrait is a compact, roughly 17vw square on desktop, with its visible
-  artwork slightly inset from the right page margin by cropping transparent
-  padding in its frame. The user-written
+- The supplied photo portrait is cropped to a compact, roughly 17vw square on desktop.
+  The previous ASCII portrait is used as a cropped favicon. The user-written
   `content/about.md` appears directly beneath it at the same width, as one plain
   paragraph with relaxed line spacing rather than a résumé section.
 - Résumé rows have readable text and room between entries; the rightmost column
@@ -114,7 +114,7 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `content/image-panes/photos/`: supplied photo originals. `scripts/prepare-photos.mjs` writes upright 1600px JPEGs to `public/images/photos/`.
 - `src/components/opening.tsx`: typing sequence and content reveal.
 - `src/components/circle-cursor.tsx`: optional mouse-only hollow circle.
-- `src/components/portrait.tsx`: static ASCII portrait with responsive image sizing.
+- `src/components/portrait.tsx`: supplied photo portrait with responsive image sizing.
 - `src/components/thermal-text.tsx`: white label plus thermal hover/focus duplicate.
 - `src/components/mobile-thermal-sweep.tsx`: brief one-time mobile thermal preview.
 - `src/components/project-video.tsx`: lazy YouTube embed with muted autoplay.
@@ -123,8 +123,11 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `content/about.md`: approved summary, rendered as plain text by the server.
 - `src/app/resume.pdf/route.ts`: serves the updated résumé PDF from `content/`.
 - `src/styles/theme.css`: all application color/font tokens.
-- `public/images/`: only public-page assets; the portrait is a static export and the
-  prepared photo copies are written there by `npm run photos`.
+- `content/aitf-usmani-portrait.png`: supplied on-page portrait, bundled by Next.js.
+- `src/app/icon.png`: favicon cropped from the earlier ASCII portrait export in
+  `public/images/atif-ascii.png`.
+- `public/images/`: prepared photo copies written there by `npm run photos`;
+  the original ASCII export remains there as the favicon source.
 - `docs/design/`: original references, source assets, and provenance.
 
 No backend, analytics, auth, chat, or terminal. The two project demo embeds contact

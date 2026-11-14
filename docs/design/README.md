@@ -10,7 +10,7 @@ The redundant nested `uxpilot-effect (1)/` export was removed during cleanup.
 Its settings and source image were identical; only playback position and asset
 identifiers differed. This is one canonical export, not a new effect implementation.
 
-## Public portrait
+## ASCII portrait source and favicon
 
 `public/images/atif-ascii.png` was generated with the supplied UX Pilot runtime:
 
@@ -21,10 +21,9 @@ identifiers differed. This is one canonical export, not a new effect implementat
 4. Mount into a 1400 × 1400 element and call `exportPNG({ pixelRatio: 1 })`.
 5. Save the resulting PNG to `public/images/atif-ascii.png`.
 
-The website serves an optimized still, not the original UX Pilot canvas runtime.
-`src/components/portrait.tsx` displays it at once when the résumé appears.
-Responsive image sizing requests enough pixels to keep the small characters
-clear on high-density screens without reinterpreting the original artwork.
+The cropped favicon in `src/app/icon.png` comes from this export. The on-page
+portrait is now the supplied `content/aitf-usmani-portrait.png`, displayed by
+`src/components/portrait.tsx`. The original UX Pilot canvas runtime is not served.
 
 The effect colors
 and character treatment were not changed. Original headshots and compiled source

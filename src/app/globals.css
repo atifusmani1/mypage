@@ -34,7 +34,7 @@ html[data-intro='run'] .details-shell, html[data-intro='run'] .identity-summary,
 .intro-caret { display: inline-block; width: 0.085em; height: 0.92em; margin-inline-start: 0.08em; background: var(--color-heading); transform: translateY(0.08em); }
 .hero-portrait { position: relative; grid-area: portrait; width: 100%; justify-self: end; aspect-ratio: 1; pointer-events: none; overflow: hidden; }
 html[data-intro='run'] .hero-portrait { visibility: hidden; }
-.ascii-portrait { width: 140%; height: 140%; max-width: none; transform: translateX(-14.3%); object-fit: contain; mix-blend-mode: screen; }
+.portrait-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
 .identity-summary { grid-area: summary; min-width: 0; font-size: 0.9375rem; line-height: 1.65; }
 .identity-summary p { margin: 0; text-wrap: pretty; overflow-wrap: anywhere; }
 .contact-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; margin-block-start: 1rem; }

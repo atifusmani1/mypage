@@ -1,5 +1,4 @@
 /* oxlint-disable react/only-export-components -- Next.js route exports. */
-import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -15,12 +14,6 @@ export const dynamicParams = false
 
 export function generateStaticParams() {
   return resumeDetails.map(({ category, slug }) => ({ category, slug }))
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, slug } = await params
-  const entry = resumeDetails.find(item => item.category === category && item.slug === slug)
-  return { title: entry ? `${entry.title} — Atif Usmani` : 'Not found — Atif Usmani' }
 }
 
 export default async function DetailPage({ params }: Props) {

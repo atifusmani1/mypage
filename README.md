@@ -40,12 +40,12 @@ before starting another server on port 3000.
 | Color and font tokens | `src/styles/theme.css` |
 | Résumé index and detail bullets | `src/data/site.ts` |
 | Hollow-circle cursor | `src/components/circle-cursor.tsx` |
-| Static ASCII portrait | `src/components/portrait.tsx` |
+| Supplied photo portrait | `content/aitf-usmani-portrait.png`, `src/components/portrait.tsx` |
 | Project demo video embed | `src/components/project-video.tsx` |
 | Resume preview dialog | `src/components/resume-popup.tsx` |
 | Summary beneath the portrait | `content/about.md` |
 | Updated résumé PDF (served at `/resume.pdf`) | `content/Atif_Usmani_UCI_DS_AI_ML.pdf`, `src/app/resume.pdf/route.ts` |
-| Public ASCII portrait | `public/images/atif-ascii.png` |
+| Favicon and its ASCII source | `src/app/icon.png`, `public/images/atif-ascii.png` |
 | Design reference, original photos, and effect source | `docs/design/` |
 | Design provenance and portrait export notes | `docs/design/README.md` |
 | Product direction | `build-concept.md` |
@@ -78,13 +78,14 @@ Search indexing remains disabled until publication is approved.
 ## Design and behavior
 
 - One opening screen on desktop; readable vertical scrolling on phones.
+- Browser tab title is "Atif Usmani" on every page.
 - Name tucked into the top left as plain text, not a bar or navigation.
 - On the first visit in a tab, a three-line typing sequence plays above the
   details: “Welcome!” above “Always Building.” above “Always Learning.” It types
   in one pass, then the page content drops in.
 - The intro plays once per tab and is skipped entirely for reduced-motion
   preferences. Without JavaScript, the final page renders immediately.
-- ASCII portrait at the top right, with the About summary and four text links
+- Supplied photo portrait at the top right, with the About summary and four text links
   beneath it; Resume opens a centered preview with Download and Close actions.
 - Education, Work, Leadership, Projects, and Research form a compact three-column
   index down the left: organization, role, and a few-word summary.
@@ -112,8 +113,7 @@ Search indexing remains disabled until publication is approved.
   tile holds its photo while the other tiles keep switching, and expands the
   cursor with that photo's title. Rotation stops for reduced-motion preferences.
   Phones stack the tiles.
-- The portrait's visible artwork sits against the right page margin (transparent
-  padding is cropped) in a smaller frame, with its summary directly
+- The photo fills a square frame at the right page margin, with its summary directly
   beneath it. Résumé text is larger and more widely spaced, with the rightmost
   column inset slightly to leave a modest gap before the summary. The left and
   middle columns and corner Gallery link retain their positions. Thermal text
@@ -131,16 +131,16 @@ Search indexing remains disabled until publication is approved.
   other two Work links for about one second each after the intro. It skips
   contacts, does not loop, and has no pause control.
 - A white hollow-circle mouse cursor; native cursor on touch, reduced motion, and forced colors.
-- Portrait hidden during typing; its existing glyph-sized image fragments fall
-  into place with the résumé reveal, then settle into the static PNG. No looping;
-  reduced motion and returning visits show the still immediately.
+- Portrait hidden during typing; the photo appears with the résumé reveal.
+  Reduced motion and returning visits show the still immediately. The earlier
+  ASCII portrait is now the favicon.
 - No homepage header, nav bar, glass effect, or footer. The Work dialog has a
   native Close button; detail pages remain available as separate static routes.
 - Visible keyboard focus and reduced-motion support.
 - Original portrait references and compiled effect code stay in `docs/design/`,
   not `public/`. The supplied gallery photos live in `content/image-panes/photos/`;
   only their prepared JPEG copies are served from `public/images/photos/`. The
-  portrait and bundled Work logos are served by the page.
+  photo portrait and bundled Work logos are served by the page.
 
 The site adds no analytics, tracking, visitor data collection, terminal simulation,
 or chat service. The Solar Shield and Parallax AI pages load YouTube's

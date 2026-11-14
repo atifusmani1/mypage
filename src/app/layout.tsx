@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Atif Usmani — Always building. Always learning.',
+  title: 'Atif Usmani',
   description: 'The personal page of Atif Usmani. A place for projects, learning, and life beyond the screen.',
   robots: { index: false, follow: false }, // Keep the placeholder draft out of search results.
 }

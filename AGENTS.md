@@ -4,8 +4,9 @@ Read `build-concept.md` before making product decisions.
 
 ## Project and stack
 
-Atif Usmani's dark recruiter-focused résumé page, with white type and an ASCII
-portrait. One screen on desktop; readable vertical scrolling on phones.
+Atif Usmani's dark recruiter-focused résumé page, with white type, a photo
+portrait, and an ASCII favicon. One screen on desktop; readable vertical scrolling
+on phones.
 
 - One Next.js App Router + React 19 + TypeScript app at the repository root.
 - Tailwind CSS v4. No component library or glass dependency.
