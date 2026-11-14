@@ -1,21 +1,21 @@
-# Welcome to Atif Usmani's portfolio
+# Atif Usmani
 
-Hi, I'm Atif. This is my personal space for sharing my work, projects, research, and a little life beyond the résumé.
+Hey, I'm Atif. Here's a bit about the work I've done, the projects and research I've been part of, and what life looks like beyond the resume.
 
-The site opens with a short welcome, then lets you explore my experience, project demos, research, photo gallery, and résumé. It works on desktop and phones, with reduced-motion and keyboard-friendly alternatives.
+You can browse the resume, open a project demo, or wander through the photo gallery. Take a look around.
 
 ## Run it locally
 
-You'll need Node.js 22 and npm. From this folder:
+With Node.js 22 installed, run:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). There is no backend or environment setup.
+Then open [localhost:3000](http://localhost:3000). No backend or environment variables needed.
 
-To check or serve a production build:
+Other useful commands:
 
 ```bash
 npm run lint
@@ -23,16 +23,6 @@ npm run build
 npm run typecheck    # after dev or build generates Next.js types
 npm start            # serves the production build on port 3000
 ```
-
-## Make it yours
-
-- **About text:** Edit [`content/about.md`](content/about.md). Keep it as plain text; the page reads it directly.
-- **Experience and projects:** Edit [`src/data/site.ts`](src/data/site.ts) for résumé entries and detail text. The original résumé is in `content/Atif_Usmani_UCI_DS_AI_ML.pdf`.
-- **Résumé download:** Replace that PDF and rebuild. The Resume link previews it and `/resume.pdf` serves it directly.
-- **Links:** Contact links are in [`src/app/page.tsx`](src/app/page.tsx); entry links are in `src/data/site.ts`.
-- **Photos:** Add originals to `content/image-panes/photos/`, run `npm run photos` on macOS to prepare web-ready copies, then add their paths and titles to [`src/data/photos.ts`](src/data/photos.ts).
-
-Search indexing is disabled until publication is approved.
 
 ## Where things live
 
@@ -47,6 +37,6 @@ Search indexing is disabled until publication is approved.
 | Photo preparation script | `scripts/prepare-photos.mjs` |
 | Design references and past verification notes | `docs/` |
 
-The small set of files at the repository root is there for npm, Next.js, TypeScript, linting, and contributor guidance. Generated files such as `.next/`, `next-env.d.ts`, and `tsconfig.tsbuildinfo` are ignored by Git.
+The files at the root are mostly config that the build tools expect there. Generated files like `.next/` are ignored by Git.
 
-Built with Next.js, React, TypeScript, and Tailwind CSS. No separate backend, analytics, or tracking. Project videos use YouTube's privacy-enhanced player, which may contact Google when opened.
+Built with Next.js, React, TypeScript, and Tailwind CSS. There's no analytics or tracking on the site; project demos use YouTube's privacy-enhanced player, which may contact Google when opened. Search indexing is disabled until publication is approved.
