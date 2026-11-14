@@ -68,7 +68,7 @@ scrolling is approved on phones and at large text sizes.
   the other two keep changing.
   Reduced motion stops the rotation. Phones stack the tiles.
 - The supplied photo portrait is cropped to a compact, roughly 17vw square on desktop.
-  The previous ASCII portrait is used as a cropped favicon. The user-written
+  A square crop of `content/huey-computer.jpg` is the favicon. The user-written
   `content/about.md` appears directly beneath it at the same width, as one plain
   paragraph with relaxed line spacing rather than a résumé section.
 - Résumé rows have readable text and room between entries; the rightmost column
@@ -124,10 +124,9 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `src/app/resume.pdf/route.ts`: serves the updated résumé PDF from `content/`.
 - `src/styles/theme.css`: all application color/font tokens.
 - `content/aitf-usmani-portrait.png`: supplied on-page portrait, bundled by Next.js.
-- `src/app/icon.png`: favicon cropped from the earlier ASCII portrait export in
-  `public/images/atif-ascii.png`.
+- `src/app/icon.png`: favicon cropped from `content/huey-computer.jpg`.
 - `public/images/`: prepared photo copies written there by `npm run photos`;
-  the original ASCII export remains there as the favicon source.
+  the favicon source stays in `content/` rather than being served separately.
 - `docs/design/`: original references, source assets, and provenance.
 
 No backend, analytics, auth, chat, or terminal. The two project demo embeds contact

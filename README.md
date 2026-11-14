@@ -45,9 +45,9 @@ before starting another server on port 3000.
 | Resume preview dialog | `src/components/resume-popup.tsx` |
 | Summary beneath the portrait | `content/about.md` |
 | Updated résumé PDF (served at `/resume.pdf`) | `content/Atif_Usmani_UCI_DS_AI_ML.pdf`, `src/app/resume.pdf/route.ts` |
-| Favicon and its ASCII source | `src/app/icon.png`, `public/images/atif-ascii.png` |
+| Favicon and supplied source image | `src/app/icon.png`, `content/huey-computer.jpg` |
 | Design reference, original photos, and effect source | `docs/design/` |
-| Design provenance and portrait export notes | `docs/design/README.md` |
+| Design provenance and historical portrait export notes | `docs/design/README.md` |
 | Product direction | `build-concept.md` |
 | Verification notes | `docs/verification.md` |
 | Contributor/agent rules | `AGENTS.md` |
@@ -132,8 +132,8 @@ Search indexing remains disabled until publication is approved.
   contacts, does not loop, and has no pause control.
 - A white hollow-circle mouse cursor; native cursor on touch, reduced motion, and forced colors.
 - Portrait hidden during typing; the photo appears with the résumé reveal.
-  Reduced motion and returning visits show the still immediately. The earlier
-  ASCII portrait is now the favicon.
+  Reduced motion and returning visits show the still immediately. A square crop
+  of `content/huey-computer.jpg` is the favicon.
 - No homepage header, nav bar, glass effect, or footer. The Work dialog has a
   native Close button; detail pages remain available as separate static routes.
 - Visible keyboard focus and reduced-motion support.
