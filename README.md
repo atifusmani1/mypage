@@ -40,10 +40,11 @@ before starting another server on port 3000.
 | Color and font tokens | `src/styles/theme.css` |
 | Résumé index and detail bullets | `src/data/site.ts` |
 | Hollow-circle cursor | `src/components/circle-cursor.tsx` |
-| Falling portrait entrance | `src/components/falling-portrait.tsx` |
+| Static ASCII portrait | `src/components/portrait.tsx` |
 | Project demo video embed | `src/components/project-video.tsx` |
+| Resume preview dialog | `src/components/resume-popup.tsx` |
 | Summary beneath the portrait | `content/about.md` |
-| Supplied résumé source (not publicly served) | `content/Atif_Usmani_DS_UCI_AI_ML.pdf` |
+| Updated résumé PDF (served at `/resume.pdf`) | `content/Atif_Usmani_UCI_DS_AI_ML.pdf`, `src/app/resume.pdf/route.ts` |
 | Public ASCII portrait | `public/images/atif-ascii.png` |
 | Design reference, original photos, and effect source | `docs/design/` |
 | Design provenance and portrait export notes | `docs/design/README.md` |
@@ -59,9 +60,13 @@ formatting. The server reads this file directly; refresh the page during
 development and rebuild to update production content.
 
 Résumé index rows and their detail-page bullets live in `src/data/site.ts`, condensed
-from the supplied PDF. Email, GitHub, LinkedIn, and MTC Instagram destinations live
-in `src/app/page.tsx` and `src/data/site.ts`. Add `video: { id, title }` to a detail
-entry to embed its YouTube demo.
+from the supplied PDF. To update the public Resume link, replace
+`content/Atif_Usmani_UCI_DS_AI_ML.pdf` and rebuild; the route serves that file
+at `/resume.pdf` without a separate public copy. The homepage Resume link opens
+an in-page preview with Download and Close; without JavaScript it opens the PDF.
+Email, GitHub, LinkedIn, and
+MTC Instagram destinations live in `src/app/page.tsx` and `src/data/site.ts`.
+Add `video: { id, title }` to a detail entry to embed its YouTube demo.
 
 Photos for Gallery live in `content/image-panes/photos/`. Add originals there, run
 `npm run photos` to write upright 1600px JPEGs into `public/images/photos/`, then add
@@ -79,7 +84,8 @@ Search indexing remains disabled until publication is approved.
   in one pass, then the page content drops in.
 - The intro plays once per tab and is skipped entirely for reduced-motion
   preferences. Without JavaScript, the final page renders immediately.
-- ASCII portrait at the top right, with the About summary and three text links beneath it.
+- ASCII portrait at the top right, with the About summary and four text links
+  beneath it; Resume opens a centered preview with Download and Close actions.
 - Education, Work, Leadership, Projects, and Research form a compact three-column
   index down the left: organization, role, and a few-word summary.
 - All Work rows open `/work`: three black, shadowed logo tiles with gaps and outer

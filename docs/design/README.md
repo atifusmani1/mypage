@@ -22,11 +22,9 @@ identifiers differed. This is one canonical export, not a new effect implementat
 5. Save the resulting PNG to `public/images/atif-ascii.png`.
 
 The website serves an optimized still, not the original UX Pilot canvas runtime.
-`src/components/falling-portrait.tsx` uses a small independent canvas entrance:
-16px character-sized fragments of this existing PNG fall into their final positions
-as the résumé appears. After about 1.45 seconds, the still replaces the canvas.
-This preserves the original finished artwork rather than reinterpreting it as a
-new character set. Reduced motion and repeat visits keep the optimized still.
+`src/components/portrait.tsx` displays it at once when the résumé appears.
+Responsive image sizing requests enough pixels to keep the small characters
+clear on high-density screens without reinterpreting the original artwork.
 
 The effect colors
 and character treatment were not changed. Original headshots and compiled source

@@ -29,14 +29,11 @@ body { margin: 0; background: var(--color-page); color: var(--color-heading); fo
 .identity { grid-area: identity; min-width: 0; padding-inline-end: 0.5rem; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'portrait' 'summary'; gap: 0.75rem; }
 html[data-intro='run'] .hero { display: block; }
 html[data-intro='run'] .details-shell, html[data-intro='run'] .identity-summary, html[data-intro='run'] .more-life { display: none; }
-.more-life { grid-area: life; justify-self: start; margin-block-start: 1.5rem; padding-block: 0.5rem; font-size: 0.9375rem; }
+.more-life { grid-area: life; justify-self: start; margin-block-start: 1.5rem; padding-block: 0.5rem; font-size: 1rem; font-weight: 600; line-height: 1.45; }
 .intro-text { min-block-size: 3.15em; margin: 0; font-size: clamp(1.75rem, 3.4vw, 3.25rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.045em; white-space: pre-line; }
 .intro-caret { display: inline-block; width: 0.085em; height: 0.92em; margin-inline-start: 0.08em; background: var(--color-heading); transform: translateY(0.08em); }
 .hero-portrait { position: relative; grid-area: portrait; width: 100%; justify-self: end; aspect-ratio: 1; pointer-events: none; overflow: hidden; }
 html[data-intro='run'] .hero-portrait { visibility: hidden; }
-.portrait-fall { display: none; position: absolute; inset: 0; width: 140%; height: 140%; transform: translateX(-14.3%); mix-blend-mode: screen; }
-.portrait-assembling .portrait-fall { display: block; }
-.portrait-assembling .ascii-portrait { visibility: hidden; }
 .ascii-portrait { width: 140%; height: 140%; max-width: none; transform: translateX(-14.3%); object-fit: contain; mix-blend-mode: screen; }
 .identity-summary { grid-area: summary; min-width: 0; font-size: 0.9375rem; line-height: 1.65; }
 .identity-summary p { margin: 0; text-wrap: pretty; overflow-wrap: anywhere; }
@@ -54,10 +51,13 @@ html[data-intro='run'] .hero-portrait { visibility: hidden; }
 @media (hover: hover) {
   .thermal-link:hover .thermal-label { opacity: 1; }
 }
+.thermal-sweep-toggle { display: none; }
 @media (max-width: 760px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .thermal-label { transition-duration: 350ms; transition-timing-function: ease-in-out; }
   .thermal-link.thermal-sweep .thermal-label { opacity: 1; }
+  .thermal-sweep-toggle { display: block; margin-block-start: 0.75rem; padding: 0.5rem 0; border: 0; background: none; color: var(--color-heading); font: inherit; text-decoration: underline; text-underline-offset: 0.2em; touch-action: manipulation; }
 }
-.details-shell { grid-area: details; min-width: 0; container-type: inline-size; }
+.details-shell { grid-area: details; min-width: 0; margin-block-start: 1rem; container-type: inline-size; }
 .details { display: grid; gap: clamp(1.3rem, 4vh, 2.75rem); }
 .detail { display: grid; gap: clamp(0.4rem, 0.8vh, 0.6rem); }
 .detail h2 { margin: 0; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
@@ -132,11 +132,22 @@ html[data-intro='run'] .hero-portrait { visibility: hidden; }
 .work-dialog { position: fixed; inset: 0; margin: auto; width: min(44rem, calc(100% - 2rem)); max-height: calc(100svh - 3rem); padding: clamp(1.25rem, 4vw, 3rem); border: 1px solid var(--color-rule); background: var(--color-popup); color: var(--color-heading); overflow-y: auto; overscroll-behavior: contain; }
 .work-dialog::backdrop { background: var(--color-backdrop); backdrop-filter: blur(10px); }
 .project-dialog { width: min(56rem, calc(100% - 2rem)); }
-html:has(.work-dialog[open]) { overflow: hidden; }
-html:has(.work-dialog[open]) .circle-cursor { display: none; }
-.circle-cursor-active .work-dialog, .circle-cursor-active .work-dialog * { cursor: auto !important; }
+html:has(.work-dialog[open], .resume-dialog[open]) { overflow: hidden; }
+html:has(.work-dialog[open], .resume-dialog[open]) .circle-cursor { display: none; }
+.circle-cursor-active .work-dialog, .circle-cursor-active .work-dialog *, .circle-cursor-active .resume-dialog, .circle-cursor-active .resume-dialog * { cursor: auto !important; }
 .work-dialog-close { display: block; margin: 0 0 2rem auto; padding: 0.5rem; min-height: 44px; border: 0; background: none; font: inherit; touch-action: manipulation; }
 @media (hover: hover) { .work-dialog-close:hover { text-decoration: underline; } }
+.resume-dialog { position: fixed; inset: 0; margin: auto; width: min(60rem, calc(100% - 2rem)); height: min(85svh, 60rem); max-height: calc(100svh - 2rem); padding: clamp(0.75rem, 2vw, 1.5rem); border: 1px solid var(--color-rule); background: var(--color-popup); color: var(--color-heading); overscroll-behavior: contain; }
+.resume-dialog[open] { display: flex; flex-direction: column; gap: 1rem; }
+.resume-dialog::backdrop { background: var(--color-backdrop); backdrop-filter: blur(10px); }
+.resume-dialog-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.resume-dialog-header h2 { margin: 0; font-size: 1.25rem; }
+.resume-dialog-actions { display: flex; align-items: center; gap: 1rem; }
+.resume-dialog-actions a, .resume-dialog-actions button { padding: 0.5rem; color: var(--color-heading); font: inherit; touch-action: manipulation; }
+.resume-dialog-actions a { text-decoration: none; }
+.resume-dialog-actions button { border: 0; background: none; cursor: pointer; }
+@media (hover: hover) { .resume-dialog-actions a:hover, .resume-dialog-actions button:hover { text-decoration: underline; } }
+.resume-preview { flex: 1; min-height: 0; width: 100%; border: 0; background: var(--color-heading); }
 .work-dialog h2 { margin: 0; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.035em; text-wrap: balance; overflow-wrap: anywhere; }
 @media (max-width: 760px) {
   .work-panes { grid-template-columns: minmax(0, 1fr); }
@@ -189,6 +200,4 @@ html:has(.work-dialog[open]) .circle-cursor { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .thermal-label { transition: none; }
-  .portrait-assembling .portrait-fall { display: none; }
-  .portrait-assembling .ascii-portrait { visibility: visible; }
 }

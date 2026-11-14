@@ -3,20 +3,20 @@
 ## Experience
 
 A minimal, dark résumé page optimized for recruiters. White text, no cards,
-navigation bar, buttons, or footer. Fit on normal desktop screens; readable
-vertical scrolling is approved on phones and at large text sizes.
+navigation bar, or footer; only the mobile thermal effect has a small pause
+button. Fit on normal desktop screens; readable vertical scrolling is approved
+on phones and at large text sizes.
 
 - Name tucked into the top-left corner.
 - On the first visit per tab, type “Welcome!”, “Always Building.”, and
   “Always Learning.” as three stacked lines. Hold briefly, clear the block,
   and drop in the résumé sections. No skip control. Reduced motion skips the intro.
 - The portrait stays hidden during typing: the initial frame shows only the name.
-  As the résumé appears, character-sized fragments of the supplied ASCII image
-  fall vertically into place over about 1.45 seconds. It settles to the original
-  still, without looping. Reduced motion, repeat visits, no JavaScript, or canvas
-  failures use the static portrait.
+  As the résumé appears, the supplied ASCII image appears all at once. Reduced
+  motion, repeat visits, and no JavaScript use the same still portrait.
 - Education, Work, Leadership, Projects, Research appear in that order on the left
-  as a compact three-column index: organization, role, and a few-word summary.
+  with breathing room below the name, as a compact three-column index:
+  organization, role, and a few-word summary.
   Education is not a link. Every Work row links to the shared `/work` gallery.
   Projects rows link to the shared `/projects` gallery. Research rows link to the
   shared `/research` gallery, and the MTC UCI
@@ -59,7 +59,8 @@ vertical scrolling is approved on phones and at large text sizes.
   restoration, and mobile stacking match Work. Existing research detail pages
   remain direct-link/no-JavaScript fallbacks and show the same figures.
 - “Gallery” sits in the homepage's bottom-left corner, below the résumé with
-  breathing room, and opens `/more-life`:
+  breathing room, matches the résumé organization names in size and weight,
+  and opens `/more-life`:
   three black photo tiles dealt from a newly shuffled photo order on each visit,
   with one tile cross-fading every 3 seconds so no two tiles change at once.
   The swap is a 500ms opacity fade with no movement. Titles appear only in the
@@ -68,7 +69,7 @@ vertical scrolling is approved on phones and at large text sizes.
   Reduced motion stops the rotation. Phones stack the tiles.
 - ASCII portrait is a compact, roughly 17vw square on desktop, with its visible
   artwork slightly inset from the right page margin by cropping transparent
-  padding in its frame; its intro canvas uses the same crop. The user-written
+  padding in its frame. The user-written
   `content/about.md` appears directly beneath it at the same width, as one plain
   paragraph with relaxed line spacing rather than a résumé section.
 - Résumé rows have readable text and room between entries; the rightmost column
@@ -76,8 +77,12 @@ vertical scrolling is approved on phones and at large text sizes.
   portrait/summary.
   On narrow screens, each row
   stacks in normal reading order and the Gallery link follows the final entry.
-- Under the summary: plain Email, GitHub, and LinkedIn links. The approved email
-  is atifaliusmani@gmail.com, overriding the email in the résumé.
+- Under the summary: plain Email, GitHub, LinkedIn, and Resume links. Resume
+  opens a centered PDF preview in a native dialog, with Download and Close actions.
+  Outside click and Escape also dismiss it, restoring focus to Resume. Without
+  JavaScript, the link opens the PDF directly at `/resume.pdf`. The PDF comes
+  from `content/Atif_Usmani_UCI_DS_AI_ML.pdf`.
+  The approved email is atifaliusmani@gmail.com, overriding the email in the résumé.
 - On phones, portrait and name lead, followed by summary, contacts, and résumé.
   Each index entry stacks its three parts instead of narrowing into columns.
 - A white hollow circle replaces the mouse cursor on fine, hover-capable pointers.
@@ -91,9 +96,10 @@ vertical scrolling is approved on phones and at large text sizes.
   for readable text on the dark page. Keyboard focus keeps a visible outline.
   Reduced motion removes the fade; forced colors keeps native text.
 - On touch-only phones, two seconds after the intro clears (or the page opens
-  on a repeat visit), the thermal link effect passes once from contacts through
-  résumé links to Gallery. Each link lights up briefly when it enters view; the
-  page never auto-scrolls. Reduced motion and forced colors skip the sweep.
+  on a repeat visit), the thermal link effect slowly sweeps from contacts through
+  résumé links to Gallery, then back up, looping. It does not auto-scroll, pauses
+  while the tab is hidden, and has a small Pause/Resume control beneath the
+  contacts. Reduced motion and forced colors skip the sweep and its control.
 
 ## Implementation
 
@@ -108,12 +114,14 @@ Next.js App Router, React 19, TypeScript, Tailwind CSS v4, Node 22. No new depen
 - `content/image-panes/photos/`: supplied photo originals. `scripts/prepare-photos.mjs` writes upright 1600px JPEGs to `public/images/photos/`.
 - `src/components/opening.tsx`: typing sequence and content reveal.
 - `src/components/circle-cursor.tsx`: optional mouse-only hollow circle.
-- `src/components/falling-portrait.tsx`: one-time canvas assembly of the portrait.
+- `src/components/portrait.tsx`: static ASCII portrait with responsive image sizing.
 - `src/components/thermal-text.tsx`: white label plus thermal hover/focus duplicate.
-- `src/components/mobile-thermal-sweep.tsx`: one-time, in-view mobile thermal preview.
+- `src/components/mobile-thermal-sweep.tsx`: looping mobile thermal preview and pause control.
 - `src/components/project-video.tsx`: lazy YouTube embed with muted autoplay.
+- `src/components/resume-popup.tsx`: homepage PDF preview dialog and download link.
 - `src/data/site.ts`: compact résumé index and fuller detail-page bullets from the PDF.
 - `content/about.md`: approved summary, rendered as plain text by the server.
+- `src/app/resume.pdf/route.ts`: serves the updated résumé PDF from `content/`.
 - `src/styles/theme.css`: all application color/font tokens.
 - `public/images/`: only public-page assets; the portrait is a static export and the
   prepared photo copies are written there by `npm run photos`.

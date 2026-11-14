@@ -99,7 +99,6 @@ export function Opening({ summary, portrait, children }: OpeningProps) {
 
   return (
     <div className="opening-inner page-width">
-      <MobileThermalSweep />
       <h1 className="site-name" translate="no">Atif Usmani</h1>
 
       <div className="hero">
@@ -111,7 +110,7 @@ export function Opening({ summary, portrait, children }: OpeningProps) {
 
       <aside className="identity" aria-label="About Atif and contact">
         {portrait}
-        <div className="identity-summary">{summary}</div>
+        <div className="identity-summary">{summary}<MobileThermalSweep /></div>
       </aside>
       {children}
     </div>

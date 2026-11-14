@@ -1,11 +1,12 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import Link from 'next/link'
-import { FallingPortrait } from '@/components/falling-portrait'
+import { Portrait } from '@/components/portrait'
 import { Opening } from '@/components/opening'
 import { CircleCursor } from '@/components/circle-cursor'
 import { resumeSections } from '@/data/site'
 import { ThermalText } from '@/components/thermal-text'
+import { ResumePopup } from '@/components/resume-popup'
 
 export default function Home() {
   const about = readFileSync(join(process.cwd(), 'content/about.md'), 'utf8')
@@ -21,9 +22,10 @@ export default function Home() {
             <a className="thermal-link" href="mailto:atifaliusmani@gmail.com"><ThermalText>Email</ThermalText></a>
             <a className="thermal-link" href="https://github.com/atifusmani1"><ThermalText>GitHub</ThermalText></a>
             <a className="thermal-link" href="https://www.linkedin.com/in/atifusmani"><ThermalText>LinkedIn</ThermalText></a>
+            <ResumePopup />
           </div>
         </>}
-        portrait={<FallingPortrait />}
+        portrait={<Portrait />}
       >
         <div className="details-shell">
           <div className="details">
